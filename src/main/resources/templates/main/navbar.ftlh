@@ -5,7 +5,7 @@
                 <img src="/img/logo2.png" alt="Logo" class="logo-small-nav">
             </a>
             <li class="nav-item">
-                <a href="/main" class="nav-link" data-pjax>Home</a>
+                <a href="/" class="nav-link" data-pjax>Home</a>
             </li>
             <#include "navbar_main_links.ftlh"/>
         </ul>

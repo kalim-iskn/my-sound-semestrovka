@@ -22,6 +22,7 @@
         <#nested/>
 
     <#if !is_pjax>
+        <#include "audio_player.ftlh">
         <footer>
             <div class="container">
                 <div class="row">

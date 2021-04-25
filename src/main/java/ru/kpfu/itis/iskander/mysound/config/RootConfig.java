@@ -16,7 +16,7 @@ public class RootConfig {
 
     @Bean
     @ConditionalOnMissingBean(ClassPathTldsLoader.class)
-    public ClassPathTldsLoader classPathTldsLoader(){
+    public ClassPathTldsLoader classPathTldsLoader() {
         return new ClassPathTldsLoader();
     }
 

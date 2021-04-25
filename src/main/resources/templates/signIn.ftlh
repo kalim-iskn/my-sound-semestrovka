@@ -1,4 +1,3 @@
-<#import "/spring.ftl" as spring />
 <#import "main/pjax_base.ftlh" as pjax_base />
 
 <@pjax_base.page title="Sign In">
@@ -21,8 +20,13 @@
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" required>
                     </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
+                        <label class="form-check-label" for="remember-me">Remember me</label>
+                    </div>
+                    <br>
                     <div class="form-group">
-                        <button type="submit" class="btn main-btn">Register</button>
+                        <button type="submit" class="btn main-btn">Log in</button>
                     </div>
                 </form>
             </div>
