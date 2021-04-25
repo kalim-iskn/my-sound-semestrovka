@@ -38,6 +38,7 @@ public class User {
 
     private String cover;
 
+    @Column(length = 500)
     private String bio;
 
     @Column(nullable = false)

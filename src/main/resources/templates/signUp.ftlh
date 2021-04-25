@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label>Biography</label>
-                        <@spring.formInput "signUpForm.bio" "required class='form-control'"/>
+                        <@spring.formTextarea "signUpForm.bio" "required class='form-control'"/>
                         <@spring.showErrors "<br>" "invalid-feedback"/>
                     </div>
                     <div class="form-group">

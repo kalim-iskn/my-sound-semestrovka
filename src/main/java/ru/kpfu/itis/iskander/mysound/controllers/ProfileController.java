@@ -21,7 +21,10 @@ public class ProfileController {
     private UsersService usersService;
 
     @RequestMapping(value = "/artist/{username}", method = RequestMethod.GET)
-    public String showProfile(@PathVariable String username, ModelMap map, @AuthenticationPrincipal UserDetails userDetails) {
+    public String showProfile(
+            @PathVariable String username,
+            ModelMap map, @AuthenticationPrincipal UserDetails userDetails
+    ) {
         try {
             User user = usersService.getUser(username);
             map.addAttribute("info", user);
