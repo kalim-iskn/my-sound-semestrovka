@@ -13,7 +13,7 @@
         </#if>
         <div class="profile-info white-content">
             <#if info.cover??>
-                <div class="profile-cover" style="background-image: url(${info.cover})"></div>
+                <div class="profile-cover" style="background-image: url(${info.coverUrl})"></div>
             </#if>
             <div class="row content">
                 <div class="col-md-3">

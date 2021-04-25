@@ -1,12 +1,9 @@
 package ru.kpfu.itis.iskander.mysound.models;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 
 import javax.persistence.*;
 
@@ -42,6 +39,7 @@ public class User {
     private String bio;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean isVerified = false;
 
     @Transient

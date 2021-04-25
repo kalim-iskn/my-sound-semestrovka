@@ -21,7 +21,6 @@ public class UsersServiceImpl implements UsersService {
     public User getUser(String username) throws NotFoundException {
         User user = usersRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException("User with username " + username + " not found"));
-        user.setCoverUrl("erq");
         urlsSetter.setToUser(user);
         return user;
     }

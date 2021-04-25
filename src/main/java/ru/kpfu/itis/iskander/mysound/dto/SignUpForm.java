@@ -6,9 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.validators.annotations.UniqueEmail;
 import ru.kpfu.itis.iskander.mysound.validators.annotations.UniqueUsername;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 public class SignUpForm {
@@ -21,10 +21,10 @@ public class SignUpForm {
     private String username;
 
     @NotBlank(message = "{validation.field.required}")
-    @Max(value = 255, message = "{validation.pseudonym.max_length}")
+    @Size(max = 255, message = "{validation.pseudonym.max_length}")
     private String pseudonym;
 
-    @Max(value = 500, message = "{validation.bio.max_length}")
+    @Size(max = 500, message = "{validation.bio.max_length}")
     private String bio;
 
     @Pattern(

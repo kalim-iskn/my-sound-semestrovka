@@ -75,6 +75,8 @@ public class SignUpServiceImpl implements SignUpService {
                 .cover(cover)
                 .build();
 
+        System.out.println(user.getIsVerified());
+
         usersRepository.save(user);
     }
 

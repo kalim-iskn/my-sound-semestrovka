@@ -1,3 +1,4 @@
 package ru.kpfu.itis.iskander.mysound.exceptions;
 
-public class AvatarInvalidException extends Throwable {}
+public class AvatarInvalidException extends Throwable {
+}
