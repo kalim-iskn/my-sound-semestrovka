@@ -17,7 +17,7 @@
             </#if>
             <div class="row content">
                 <div class="col-md-3">
-                    <#if info.avatar??>
+                    <#if info.avatarUrl??>
                         <div class="profile-avatar" style="background-image: url(${info.avatarUrl})"></div>
                     </#if>
                     <p class="statistic">

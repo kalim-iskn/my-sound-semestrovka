@@ -947,3 +947,21 @@ input[type=password] {
     font-size: 90%;
     font-weight: 500;
 }
+
+.vk-btn {
+    background: #4a76a8;
+    color: white;
+    padding-left: 10px;
+    line-height: 29px;
+    padding-bottom: 7px;
+}
+
+.vk-btn img {
+    height: 30px;
+    margin-right: 9px;
+    float: left;
+}
+
+.vk-btn:hover {
+    color: white;
+}

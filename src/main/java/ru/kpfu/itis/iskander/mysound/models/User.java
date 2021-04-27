@@ -24,13 +24,11 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private String pseudonym;
 
-    @Column(nullable = false)
     private String avatar;
 
     private String cover;
@@ -41,6 +39,9 @@ public class User {
     @Column(nullable = false)
     @Builder.Default
     private Boolean isVerified = false;
+
+    @Column(unique = true)
+    private Long vkUserId;
 
     @Transient
     private String avatarUrl;

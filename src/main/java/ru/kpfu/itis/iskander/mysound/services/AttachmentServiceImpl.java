@@ -4,7 +4,7 @@ import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
-import ru.kpfu.itis.iskander.mysound.dto.AttachmentDTO;
+import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AttachmentService;
 
@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
-    public String uploadFile(AttachmentDTO attachment) throws InvalidAttachmentException, IOException {
+    public String uploadFile(AttachmentDto attachment) throws InvalidAttachmentException, IOException {
 
         MultipartFile file = attachment.getFile();
 

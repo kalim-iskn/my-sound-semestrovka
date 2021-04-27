@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
-import ru.kpfu.itis.iskander.mysound.dto.AttachmentDTO;
+import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
@@ -33,27 +33,37 @@ public class SignUpServiceImpl implements SignUpService {
     @Autowired
     private ProjectProperties projectProperties;
 
+    private Boolean isOauthRegistration = false;
+    private Long vkUserId = null;
+
+    public void setVkOptions(Long vkUserId) {
+        isOauthRegistration = true;
+        this.vkUserId = vkUserId;
+    }
+
     @Override
-    public void signUp(SignUpForm signUpForm)
+    public User signUp(SignUpForm signUpForm)
             throws PasswordsNotMatchException, AvatarInvalidException, CoverInvalidException {
 
-        if (!signUpForm.getPassword().equals(signUpForm.getRePassword()))
+        if (signUpForm.getPassword() != null && !signUpForm.getPassword().equals(signUpForm.getRePassword()))
             throw new PasswordsNotMatchException();
 
-        String avatar;
+        String avatar = null;
         String cover = null;
 
-        try {
-            avatar = uploadImage(
-                    signUpForm.getAvatar(),
-                    projectProperties.getAvatarsMaxSize(),
-                    projectProperties.getAvatarsDirectory()
-            );
-        } catch (IOException | InvalidAttachmentException e) {
-            throw new AvatarInvalidException();
+        if (!isOauthRegistration) {
+            try {
+                avatar = uploadImage(
+                        signUpForm.getAvatar(),
+                        projectProperties.getAvatarsMaxSize(),
+                        projectProperties.getAvatarsDirectory()
+                );
+            } catch (IOException | InvalidAttachmentException e) {
+                throw new AvatarInvalidException();
+            }
         }
 
-        if (!signUpForm.getCover().isEmpty()) {
+        if (signUpForm.getCover() != null && !signUpForm.getCover().isEmpty()) {
             try {
                 cover = uploadImage(
                         signUpForm.getCover(),
@@ -67,17 +77,18 @@ public class SignUpServiceImpl implements SignUpService {
 
         User user = User.builder()
                 .email(signUpForm.getEmail())
-                .password(passwordEncoder.encode(signUpForm.getPassword()))
                 .username(signUpForm.getUsername())
                 .pseudonym(signUpForm.getPseudonym())
                 .bio(signUpForm.getBio())
                 .avatar(avatar)
                 .cover(cover)
+                .vkUserId(vkUserId)
                 .build();
 
-        System.out.println(user.getIsVerified());
+        if (!isOauthRegistration)
+            user.setPassword(passwordEncoder.encode(signUpForm.getPassword()));
 
-        usersRepository.save(user);
+        return usersRepository.save(user);
     }
 
     private String uploadImage(
@@ -85,7 +96,7 @@ public class SignUpServiceImpl implements SignUpService {
             float maxSize,
             String directory
     ) throws IOException, InvalidAttachmentException {
-        AttachmentDTO attachmentDTO = AttachmentDTO.builder()
+        AttachmentDto attachmentDTO = AttachmentDto.builder()
                 .file(file)
                 .requiredMimes(projectProperties.getRequiredImgMimes())
                 .requiredSize(maxSize)

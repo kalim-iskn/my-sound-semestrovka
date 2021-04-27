@@ -5,6 +5,7 @@
         <div class="panel col-6 mx-auto">
             <div class="content">
                 <h3 class="panel-header">Sign in</h3>
+                <#include "main/oauth_buttons.ftlh">
                 <form method="post" class="form" enctype="multipart/form-data" action="/signin">
                     <#if invalid_credentials??>
                         <div class="alert alert-danger">

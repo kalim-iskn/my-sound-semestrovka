@@ -3,6 +3,8 @@ package ru.kpfu.itis.iskander.mysound.config;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Locale;
+
 @ConfigurationProperties("app")
 @Data
 public class ProjectProperties {
@@ -11,12 +13,24 @@ public class ProjectProperties {
 
     private float avatarsMaxSize = 3145728;
 
+    private float coverMaxSize = 3145728;
+
     private String[] requiredImgMimes = new String[]{"image/jpeg", "image/png"};
 
     private String staticDirectory = "static";
 
     private String coversDirectory = "covers";
 
-    private float coverMaxSize = 3145728;
+    private String vkApiVersion = "5.103";
+
+    private long vkApiClientId = 7839199;
+
+    private String vkApiClientSecret = "kDRfYCSfFR2sAg7NsJWa";
+
+    private String vkRedirectUri = "http://127.0.0.1:8080/oauth/vk";
+
+    private Locale locale = Locale.ENGLISH;
+
+    private String noAvatarUrl = "/img/no-photo.jpg";
 
 }

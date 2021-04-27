@@ -1,6 +1,9 @@
 package ru.kpfu.itis.iskander.mysound.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.validators.annotations.UniqueEmail;
@@ -11,6 +14,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignUpForm {
 
     @Pattern(
