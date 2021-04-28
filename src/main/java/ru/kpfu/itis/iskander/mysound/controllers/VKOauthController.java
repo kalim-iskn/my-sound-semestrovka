@@ -3,11 +3,6 @@ package ru.kpfu.itis.iskander.mysound.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +13,7 @@ import ru.kpfu.itis.iskander.mysound.exceptions.EmailAlreadyExistException;
 import ru.kpfu.itis.iskander.mysound.exceptions.ProblemWithConnectionToUrl;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
 import ru.kpfu.itis.iskander.mysound.models.User;
+import ru.kpfu.itis.iskander.mysound.services.interfaces.AuthenticationService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.VkOauthService;
 
 @Controller
@@ -25,8 +21,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.VkOauthService;
 public class VKOauthController {
 
     @Autowired
-    @Qualifier("customUserDetailsManager")
-    private UserDetailsManager userDetailsManager;
+    private AuthenticationService authenticationService;
 
     @Autowired
     @Qualifier("vkOauth")
@@ -50,13 +45,7 @@ public class VKOauthController {
 
         try {
             User user = vkOauthService.authorize(code);
-            UserDetails userDetails = userDetailsManager.loadUserByUsername(user.getUsername());
-            Authentication auth = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null,
-                    userDetails.getAuthorities()
-            );
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            authenticationService.authenticate(user.getUsername());
             return "redirect:/my_profile";
         } catch (ProblemWithConnectionToUrl | UndefinedServerProblemException problemWithConnectionToUrl) {
             errorCode = "errors.oauth.undefined";

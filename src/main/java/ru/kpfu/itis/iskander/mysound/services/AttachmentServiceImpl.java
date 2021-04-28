@@ -47,11 +47,18 @@ public class AttachmentServiceImpl implements AttachmentService {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
                 return fileName;
             } catch (IOException ioe) {
+                //TODO add to logs
                 throw new IOException("Could not save image file: " + fileName, ioe);
             }
         } else {
             throw new InvalidAttachmentException();
         }
+    }
+
+    @Override
+    public boolean deleteFile(String filename, String directory) throws IOException {
+        Path path = Paths.get(directory, filename);
+        return Files.deleteIfExists(path);
     }
 
 }

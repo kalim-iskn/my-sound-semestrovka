@@ -18,8 +18,20 @@ public class PjaxFilter implements Filter {
     ) throws IOException, ServletException {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        httpServletResponse.addHeader("X-PJAX-URL", httpServletRequest.getRequestURI());
+        String url = getFullURL(httpServletRequest);
+        httpServletResponse.addHeader("X-PJAX-URL", url);
         chain.doFilter(request, response);
+    }
+
+    private String getFullURL(HttpServletRequest request) {
+        StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
+        String queryString = request.getQueryString();
+
+        if (queryString == null) {
+            return requestURL.toString();
+        } else {
+            return requestURL.append('?').append(queryString).toString();
+        }
     }
 
 }
