@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import ru.kpfu.itis.iskander.mysound.validators.annotations.UniqueUsername;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -21,7 +20,6 @@ public class EditProfileForm {
             regexp = "^(?=.{2,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$",
             message = "{validation.username.requirements}"
     )
-    @UniqueUsername(onePossible = true)
     private String username;
 
     @NotBlank(message = "{validation.field.required}")

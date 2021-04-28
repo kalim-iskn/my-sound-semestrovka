@@ -15,6 +15,7 @@ import ru.kpfu.itis.iskander.mysound.dto.EditProfileForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.exceptions.UsernameNotUniqueException;
 import ru.kpfu.itis.iskander.mysound.helpers.RedirectHelper;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AuthenticationService;
@@ -72,6 +73,9 @@ public class EditProfileController {
                     authenticationService.authenticate(form.getUsername());
                 }
                 return "redirect:/edit-profile";
+            } catch (UsernameNotUniqueException e) {
+                result.rejectValue("username", "validation.username.not_unique");
+                return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
             } catch (UndefinedServerProblemException e) {
                 redirectAttributes.addFlashAttribute("status", false);
                 return "redirect:/edit-profile";

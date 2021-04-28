@@ -17,7 +17,5 @@ public @interface UniqueUsername {
 
     Class<?>[] groups() default {};
 
-    boolean onePossible() default false;
-
     Class<? extends Payload>[] payload() default {};
 }

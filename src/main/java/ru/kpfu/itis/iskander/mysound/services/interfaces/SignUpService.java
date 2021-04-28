@@ -10,6 +10,8 @@ public interface SignUpService {
 
     void setVkOptions(Long vkId);
 
+    void setNormalRegistrationOptions();
+
     User signUp(SignUpForm signUpForm) throws PasswordsNotMatchException, AvatarInvalidException, CoverInvalidException;
 
 }

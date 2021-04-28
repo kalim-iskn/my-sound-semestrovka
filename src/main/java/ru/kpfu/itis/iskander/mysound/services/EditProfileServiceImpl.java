@@ -3,10 +3,7 @@ package ru.kpfu.itis.iskander.mysound.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kpfu.itis.iskander.mysound.dto.EditProfileForm;
-import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
-import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.exceptions.*;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.EditProfileService;
@@ -24,9 +21,14 @@ public class EditProfileServiceImpl implements EditProfileService {
     private UserPhotosService userPhotosService;
 
     @Override
-    public void editProfile(EditProfileForm form, String username)
-            throws UndefinedServerProblemException, AvatarInvalidException, CoverInvalidException {
-        User user = usersRepository.findByUsername(username).orElseThrow(UndefinedServerProblemException::new);
+    public void editProfile(EditProfileForm form, String authUsername) throws UndefinedServerProblemException,
+            AvatarInvalidException, CoverInvalidException, UsernameNotUniqueException {
+        User user = usersRepository.findByUsername(authUsername).orElseThrow(UndefinedServerProblemException::new);
+
+        if (!user.getUsername().equals(form.getUsername())) {
+            if (usersRepository.existsByUsernameAndIdIsNot(form.getUsername(), user.getId()))
+                throw new UsernameNotUniqueException();
+        }
 
         if (form.getAvatar() != null && !form.getAvatar().isEmpty()) {
             try {

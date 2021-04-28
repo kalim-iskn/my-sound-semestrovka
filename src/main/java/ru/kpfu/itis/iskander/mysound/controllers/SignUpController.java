@@ -53,6 +53,7 @@ public class SignUpController {
             return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
         } else {
             try {
+                signUpService.setNormalRegistrationOptions();
                 User user = signUpService.signUp(signUpForm);
                 authenticationService.authenticate(user.getUsername());
                 return "redirect:/my_profile";

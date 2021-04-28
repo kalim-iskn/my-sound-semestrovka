@@ -15,6 +15,6 @@ public interface UsersRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByVkUserIdOrEmail(Long id, String email);
 
-    int countAllByUsername(String username);
+    boolean existsByUsernameAndIdIsNot(String username, Long id);
 
 }

@@ -30,9 +30,16 @@ public class SignUpServiceImpl implements SignUpService {
     private Boolean isOauthRegistration = false;
     private Long vkUserId = null;
 
+    @Override
     public void setVkOptions(Long vkUserId) {
         isOauthRegistration = true;
         this.vkUserId = vkUserId;
+    }
+
+    @Override
+    public void setNormalRegistrationOptions() {
+        isOauthRegistration = false;
+        vkUserId = null;
     }
 
     @Override

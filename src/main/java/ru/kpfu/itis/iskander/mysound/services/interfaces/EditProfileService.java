@@ -4,10 +4,11 @@ import ru.kpfu.itis.iskander.mysound.dto.EditProfileForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.exceptions.UsernameNotUniqueException;
 
 public interface EditProfileService {
 
-    void editProfile(EditProfileForm form, String username)
-            throws UndefinedServerProblemException, AvatarInvalidException, CoverInvalidException;
+    void editProfile(EditProfileForm form, String authUsername) throws UndefinedServerProblemException,
+            AvatarInvalidException, CoverInvalidException, UsernameNotUniqueException;
 
 }
