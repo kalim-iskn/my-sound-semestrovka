@@ -7,7 +7,7 @@ import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.dto.oauth.vk.UserAccessDataDto;
 import ru.kpfu.itis.iskander.mysound.dto.oauth.vk.UserInfoVk;
 import ru.kpfu.itis.iskander.mysound.exceptions.*;
-import ru.kpfu.itis.iskander.mysound.helpers.JsonHelper;
+import ru.kpfu.itis.iskander.mysound.helpers.interfaces.JsonHelper;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.HttpRequestSender;

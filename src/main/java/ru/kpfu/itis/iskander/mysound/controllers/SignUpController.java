@@ -13,7 +13,7 @@ import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PasswordsNotMatchException;
-import ru.kpfu.itis.iskander.mysound.helpers.RedirectHelper;
+import ru.kpfu.itis.iskander.mysound.helpers.interfaces.RedirectHelper;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AuthenticationService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.SignUpService;
@@ -50,8 +50,6 @@ public class SignUpController {
     public String signUp(@Valid SignUpForm signUpForm, BindingResult result, RedirectAttributes redirectAttributes) {
         redirectHelper.init("signUpForm", "signup");
         if (result.hasErrors()) {
-            return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
-        } else {
             try {
                 signUpService.setNormalRegistrationOptions();
                 User user = signUpService.signUp(signUpForm);
@@ -59,15 +57,13 @@ public class SignUpController {
                 return "redirect:/my_profile";
             } catch (PasswordsNotMatchException e) {
                 result.rejectValue("password", "errors.passwords_mismatch");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
             } catch (AvatarInvalidException e) {
                 result.rejectValue("avatar", "errors.avatar.invalid");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
             } catch (CoverInvalidException e) {
                 result.rejectValue("cover", "errors.cover.invalid");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
             }
         }
+        return redirectHelper.redirectBackWithErrors(redirectAttributes, signUpForm, result);
     }
 
 }

@@ -1,9 +1,11 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.apache.tika.Tika;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AttachmentService;
@@ -19,6 +21,9 @@ import java.util.Arrays;
 
 @Component
 public class AttachmentServiceImpl implements AttachmentService {
+
+    @Autowired
+    private ProjectProperties projectProperties;
 
     @Override
     public String uploadFile(AttachmentDto attachment) throws InvalidAttachmentException, IOException {
@@ -38,7 +43,7 @@ public class AttachmentServiceImpl implements AttachmentService {
             ) + "." + attachment.getFileExtension();
 
             try (InputStream inputStream = file.getInputStream()) {
-                Path uploadPath = Paths.get(attachment.getUploadDir());
+                Path uploadPath = Paths.get(projectProperties.getMediaDirectory(), attachment.getUploadDir());
                 Path filePath = uploadPath.resolve(fileName);
 
                 if (!Files.exists(uploadPath))
@@ -57,7 +62,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public boolean deleteFile(String filename, String directory) throws IOException {
-        Path path = Paths.get(directory, filename);
+        Path path = Paths.get(projectProperties.getMediaDirectory(), directory, filename);
         return Files.deleteIfExists(path);
     }
 

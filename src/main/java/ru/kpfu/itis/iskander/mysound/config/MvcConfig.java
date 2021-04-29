@@ -16,6 +16,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        exposeDirectory(projectProperties.getMediaDirectory(), registry);
+        exposeDirectory(projectProperties.getAudiosDirectory(), registry);
+        exposeDirectory(projectProperties.getPostersDirectory(), registry);
         exposeDirectory(projectProperties.getAvatarsDirectory(), registry);
         exposeDirectory(projectProperties.getCoversDirectory(), registry);
     }

@@ -2,9 +2,10 @@ package ru.kpfu.itis.iskander.mysound.helpers;
 
 import com.google.gson.*;
 import org.springframework.stereotype.Component;
+import ru.kpfu.itis.iskander.mysound.helpers.interfaces.JsonHelper;
 
 @Component
-public class JsonHelper {
+public class GsonJsonHelper implements JsonHelper {
 
     public <T> T convertFromJson(String json, Class<T> valueType, String rootKey) {
         Gson gson = new GsonBuilder()

@@ -16,7 +16,7 @@ import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UsernameNotUniqueException;
-import ru.kpfu.itis.iskander.mysound.helpers.RedirectHelper;
+import ru.kpfu.itis.iskander.mysound.helpers.interfaces.RedirectHelper;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AuthenticationService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.EditProfileService;
@@ -63,9 +63,7 @@ public class EditProfileController {
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         redirectHelper.init("editProfileForm", "edit-profile");
-        if (result.hasErrors()) {
-            return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
-        } else {
+        if (!result.hasErrors()) {
             try {
                 editProfileService.editProfile(form, userDetails.getUsername());
                 redirectAttributes.addFlashAttribute("status", true);
@@ -75,18 +73,16 @@ public class EditProfileController {
                 return "redirect:/edit-profile";
             } catch (UsernameNotUniqueException e) {
                 result.rejectValue("username", "validation.username.not_unique");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
             } catch (UndefinedServerProblemException e) {
                 redirectAttributes.addFlashAttribute("status", false);
                 return "redirect:/edit-profile";
             } catch (AvatarInvalidException e) {
                 result.rejectValue("avatar", "errors.avatar.invalid");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
             } catch (CoverInvalidException e) {
                 result.rejectValue("cover", "errors.cover.invalid");
-                return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
             }
         }
+        return redirectHelper.redirectBackWithErrors(redirectAttributes, form, result);
     }
 
 }

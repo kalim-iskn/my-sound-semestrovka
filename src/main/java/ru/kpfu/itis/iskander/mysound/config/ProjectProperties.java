@@ -9,17 +9,29 @@ import java.util.Locale;
 @Data
 public class ProjectProperties {
 
-    private String avatarsDirectory = "avatars";
-
-    private float avatarsMaxSize = 3145728;
-
-    private float coverMaxSize = 3145728;
-
-    private String[] requiredImgMimes = new String[]{"image/jpeg", "image/png"};
-
     private String staticDirectory = "static";
 
+    private String mediaDirectory = "media";
+
+    private String avatarsDirectory = "avatars";
+
     private String coversDirectory = "covers";
+
+    private String postersDirectory = "posters";
+
+    private String audiosDirectory = "audios";
+
+    private long avatarsMaxSize = 3145728;
+
+    private long coverMaxSize = 3145728;
+
+    private long posterMaxSize = 3145728;
+
+    private long audioMaxSize = 15728640;
+
+    private String[] requiredAudioMimes = new String[]{"audio/mpeg"};
+
+    private String[] requiredImgMimes = new String[]{"image/jpeg", "image/png"};
 
     private String vkApiVersion = "5.103";
 

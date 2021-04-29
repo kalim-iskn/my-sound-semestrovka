@@ -6,8 +6,7 @@ target/
 .mvn/
 
 ### STATIC FILES ###
-/avatars/
-/covers/
+/media/
 
 ### STS ###
 .apt_generated

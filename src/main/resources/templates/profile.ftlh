@@ -80,7 +80,7 @@
         <div class="section profile-tracks white-content">
             <h3 style="color: #D32F2F">Tracks</h3>
             <div class="row">
-                <#include "tracks_generation.ftlh">
+                <#include "tracks/tracks_generation.ftlh">
             </div>
         </div>
     </div>
