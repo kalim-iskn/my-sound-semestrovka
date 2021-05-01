@@ -75,6 +75,11 @@ public class TrackServiceImpl implements TrackService {
         return trackBuilder.build(tracksRepository.getAllByUserUsername(username));
     }
 
+    @Override
+    public Track getTrack(Long id) throws TrackNotFound {
+        return trackBuilder.build(tracksRepository.findById(id).orElseThrow(TrackNotFound::new));
+    }
+
     private void saveTrack(String username, TrackForm form, Long trackId)
             throws UndefinedServerProblemException, AudioInvalidException, PosterInvalidException {
         boolean isAdding = trackId == null;

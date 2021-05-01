@@ -25,4 +25,6 @@ public interface TrackService {
 
     List<Track> getList(String username);
 
+    Track getTrack(Long id) throws TrackNotFound;
+
 }
