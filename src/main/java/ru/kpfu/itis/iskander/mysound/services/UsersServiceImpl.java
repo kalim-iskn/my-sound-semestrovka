@@ -8,6 +8,8 @@ import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.UsersService;
 
+import java.util.List;
+
 @Component
 public class UsersServiceImpl implements UsersService {
 
@@ -22,6 +24,11 @@ public class UsersServiceImpl implements UsersService {
         User user = usersRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException("User with username " + username + " not found"));
         return userBuilder.build(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userBuilder.build(usersRepository.findAll());
     }
 
 }

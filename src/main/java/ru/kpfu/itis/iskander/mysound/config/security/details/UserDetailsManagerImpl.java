@@ -14,16 +14,20 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     private UsersRepository usersRepository;
 
     @Override
-    public void createUser(UserDetails user) {}
+    public void createUser(UserDetails user) {
+    }
 
     @Override
-    public void updateUser(UserDetails user) {}
+    public void updateUser(UserDetails user) {
+    }
 
     @Override
-    public void deleteUser(String username) {}
+    public void deleteUser(String username) {
+    }
 
     @Override
-    public void changePassword(String oldPassword, String newPassword) {}
+    public void changePassword(String oldPassword, String newPassword) {
+    }
 
     @Override
     public boolean userExists(String username) {

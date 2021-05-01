@@ -6,6 +6,9 @@ import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.UserBuilder;
 import ru.kpfu.itis.iskander.mysound.models.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UserBuilderImpl implements UserBuilder {
 
@@ -26,6 +29,11 @@ public class UserBuilderImpl implements UserBuilder {
             user.setCoverUrl(mediaDir + projectProperties.getCoversDirectory() + "/" + user.getCover());
         }
         return user;
+    }
+
+    @Override
+    public List<User> build(List<User> users) {
+        return users.stream().map(this::build).collect(Collectors.toList());
     }
 
 }
