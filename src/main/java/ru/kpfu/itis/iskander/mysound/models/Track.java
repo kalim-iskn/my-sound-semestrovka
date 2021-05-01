@@ -49,4 +49,10 @@ public class Track {
     @Column(nullable = false, updatable = false)
     private LocalDate createdAt = LocalDate.from(LocalDate.now());
 
+    @Transient
+    private String posterUrl;
+
+    @Transient
+    private String audioUrl;
+
 }

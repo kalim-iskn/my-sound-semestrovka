@@ -7,7 +7,7 @@ import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
-import ru.kpfu.itis.iskander.mysound.services.interfaces.AttachmentService;
+import ru.kpfu.itis.iskander.mysound.services.interfaces.MediaService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.UserPhotosService;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class UserPhotosServiceImpl implements UserPhotosService {
     private ProjectProperties projectProperties;
 
     @Autowired
-    private AttachmentService attachmentService;
+    private MediaService mediaService;
 
     public String uploadAvatar(MultipartFile file) throws IOException, InvalidAttachmentException {
         return uploadImage(
@@ -50,13 +50,13 @@ public class UserPhotosServiceImpl implements UserPhotosService {
                 .fileExtension("jpg")
                 .build();
 
-        return attachmentService.uploadFile(attachmentDTO);
+        return mediaService.uploadFile(attachmentDTO);
     }
 
     @Override
     public void deleteAvatar(String avatar) throws UndefinedServerProblemException {
         try {
-            attachmentService.deleteFile(avatar, projectProperties.getAvatarsDirectory());
+            mediaService.deleteFile(avatar, projectProperties.getAvatarsDirectory());
         } catch (IOException e) {
             throw new UndefinedServerProblemException();
         }
@@ -65,7 +65,7 @@ public class UserPhotosServiceImpl implements UserPhotosService {
     @Override
     public void deleteCover(String cover) throws UndefinedServerProblemException {
         try {
-            attachmentService.deleteFile(cover, projectProperties.getCoversDirectory());
+            mediaService.deleteFile(cover, projectProperties.getCoversDirectory());
         } catch (IOException e) {
             throw new UndefinedServerProblemException();
         }

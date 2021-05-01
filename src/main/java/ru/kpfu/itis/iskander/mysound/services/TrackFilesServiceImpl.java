@@ -8,7 +8,8 @@ import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
-import ru.kpfu.itis.iskander.mysound.services.interfaces.AttachmentService;
+import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.services.interfaces.MediaService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackFilesService;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class TrackFilesServiceImpl implements TrackFilesService {
     private ProjectProperties projectProperties;
 
     @Autowired
-    private AttachmentService attachmentService;
+    private MediaService mediaService;
 
     public String uploadAudio(MultipartFile file) throws AudioInvalidException {
         try {
@@ -31,7 +32,7 @@ public class TrackFilesServiceImpl implements TrackFilesService {
                     .requiredSize(projectProperties.getAudioMaxSize())
                     .uploadDir(projectProperties.getAudiosDirectory())
                     .build();
-            return attachmentService.uploadFile(attachmentDto);
+            return mediaService.uploadFile(attachmentDto);
         } catch (IOException | InvalidAttachmentException e) {
             throw new AudioInvalidException();
         }
@@ -46,9 +47,27 @@ public class TrackFilesServiceImpl implements TrackFilesService {
                     .requiredSize(projectProperties.getPosterMaxSize())
                     .uploadDir(projectProperties.getPostersDirectory())
                     .build();
-            return attachmentService.uploadFile(attachmentDto);
+            return mediaService.uploadFile(attachmentDto);
         } catch (IOException | InvalidAttachmentException e) {
             throw new PosterInvalidException();
+        }
+    }
+
+    @Override
+    public void deleteAudio(String audio) throws UndefinedServerProblemException {
+        try {
+            mediaService.deleteFile(audio, projectProperties.getAudiosDirectory());
+        } catch (IOException e) {
+            throw new UndefinedServerProblemException();
+        }
+    }
+
+    @Override
+    public void deletePoster(String poster) throws UndefinedServerProblemException {
+        try {
+            mediaService.deleteFile(poster, projectProperties.getPostersDirectory());
+        } catch (IOException e) {
+            throw new UndefinedServerProblemException();
         }
     }
 

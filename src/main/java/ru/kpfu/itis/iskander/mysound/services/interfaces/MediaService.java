@@ -5,7 +5,7 @@ import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
 
 import java.io.IOException;
 
-public interface AttachmentService {
+public interface MediaService {
 
     String uploadFile(AttachmentDto attachment) throws InvalidAttachmentException, IOException;
 

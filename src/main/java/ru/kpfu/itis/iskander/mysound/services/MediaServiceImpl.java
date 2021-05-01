@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.InvalidAttachmentException;
-import ru.kpfu.itis.iskander.mysound.services.interfaces.AttachmentService;
+import ru.kpfu.itis.iskander.mysound.services.interfaces.MediaService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 
 @Component
-public class AttachmentServiceImpl implements AttachmentService {
+public class MediaServiceImpl implements MediaService {
 
     @Autowired
     private ProjectProperties projectProperties;

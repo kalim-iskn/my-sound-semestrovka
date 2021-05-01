@@ -33,24 +33,40 @@
 
                     <div class="form-group">
                         <label>Description</label>
-                        <@spring.formInput "form.description" "class='form-control'"/>
+                        <@spring.formTextarea "form.description" "class='form-control'"/>
                         <@spring.showErrors "<br>" "invalid-feedback"/>
                     </div>
 
-                    <div class="form-group">
-                        <label>Poster*</label>
-                        <@spring.formInput "form.poster" "required class='form-control'" "file"/>
-                        <@spring.showErrors "<br>" "invalid-feedback"/>
-                    </div>
+                    <#if isAdding>
+                        <div class="form-group">
+                            <label>Poster*</label>
+                            <@spring.formInput "form.poster" "required class='form-control'" "file"/>
+                            <@spring.showErrors "<br>" "invalid-feedback"/>
+                        </div>
+                    <#else>
+                        <div class="form-group">
+                            <label>Change poster</label>
+                            <@spring.formInput "form.poster" "class='form-control'" "file"/>
+                            <@spring.showErrors "<br>" "invalid-feedback"/>
+                        </div>
+                    </#if>
+
+                    <#if isAdding>
+                        <div class="form-group">
+                            <label>Audio in mp3*</label>
+                            <@spring.formInput "form.audio" "required class='form-control'" "file"/>
+                            <@spring.showErrors "<br>" "invalid-feedback"/>
+                        </div>
+                    </#if>
 
                     <div class="form-group">
-                        <label>Audio in mp3*</label>
-                        <@spring.formInput "form.audio" "required class='form-control'" "file"/>
-                        <@spring.showErrors "<br>" "invalid-feedback"/>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn main-btn">Add</button>
+                        <button type="submit" class="btn main-btn">
+                            <#if isAdding>
+                                Add
+                            <#else>
+                                Edit
+                            </#if>
+                        </button>
                     </div>
 
                 </form>

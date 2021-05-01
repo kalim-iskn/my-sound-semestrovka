@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Futura';
     src: local('Futura PT Book'), local('Futura-PT-Book'),
-        url('/fonts/FuturaPT-Book.woff2') format('woff2'),
-        url('/fonts/FuturaPT-Book.woff') format('woff'),
-        url('/fonts/FuturaPT-Book.ttf') format('truetype');
+    url('/fonts/FuturaPT-Book.woff2') format('woff2'),
+    url('/fonts/FuturaPT-Book.woff') format('woff'),
+    url('/fonts/FuturaPT-Book.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,9 +11,9 @@
 @font-face {
     font-family: 'Futura';
     src: local('Futura PT Medium'), local('Futura-PT-Medium'),
-        url('/fonts/FuturaPT-Medium.woff2') format('woff2'),
-        url('/fonts/FuturaPT-Medium.woff') format('woff'),
-        url('/fonts/FuturaPT-Medium.ttf') format('truetype');
+    url('/fonts/FuturaPT-Medium.woff2') format('woff2'),
+    url('/fonts/FuturaPT-Medium.woff') format('woff'),
+    url('/fonts/FuturaPT-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
@@ -82,12 +82,14 @@ html, body {
     display: block;
     color: #423c3c;
 }
+
 .track-card-small:hover {
     color: inherit;
     text-decoration: none;
 }
+
 .track-card-small .track-cover {
-    display:block;
+    display: block;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -96,12 +98,14 @@ html, body {
     cursor: pointer;
     text-decoration: none;
 }
+
 .track-card-small .play-button {
     cursor: pointer;
     display: block;
     color: inherit;
     text-decoration: none;
 }
+
 .track-card-small .content {
     padding: 15px;
     font-size: 18px;
@@ -124,9 +128,11 @@ html, body {
     font-weight: 500;
     font-size: 22px;
 }
+
 .track-card-small .track-name .verified {
-    font-size: 19px!important;
+    font-size: 19px !important;
 }
+
 .track-card-small .track-name, .artist-name {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -212,16 +218,20 @@ footer {
 .track-poster-container {
     padding: 0 40px 0 15px;
 }
+
 .track-info .verified {
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
+
 .track-info .description {
     margin-top: 25px
 }
+
 .track-info .description .added-date {
     margin-bottom: 15px;
     font-size: 15px;
 }
+
 .comment {
     padding: 10px;
     margin-top: 10px;
@@ -261,35 +271,44 @@ footer {
     margin-top: 15px;
     text-align: center;
 }
+
 .track-statistic .parameter {
     margin-right: 25px;
     color: #423c3c;
     display: inline-block;
     font-size: 15px;
 }
+
 .track-statistic i {
     color: #423c3c;
 }
+
 .btn {
     outline: none;
 }
+
 .btn-basic {
     color: #423c3c;
 }
+
 .btn.focus, .btn:focus {
     box-shadow: none;
 }
+
 .btn-basic:hover, .btn-liked:hover {
     color: #D32F2F;
 }
+
 .btn-liked {
     color: #D32F2F;
 }
+
 .main-btn-dark {
     background: #423c3c;
     border-color: #423c3c;
     color: white;
 }
+
 .main-btn-dark:hover {
     color: white;
 }
@@ -299,36 +318,45 @@ footer {
     background: white;
     padding: 0;
 }
+
 .panel .panel-header {
     text-align: center;
     padding-top: 10px;
 }
+
 .panel .content {
     padding: 20px;
 }
+
 .panel .cover-img {
     background-position: center;
     background-size: cover;
     height: 120px;
     margin-bottom: -10px;
 }
+
 .errorlist {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .profile-info {
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 }
+
 .profile-info .content {
     padding: 40px 25px 25px;
 }
+
 .profile-info .statistic {
     margin-top: 20px;
     text-align: center;
 }
+
 .profile-info .statistic a {
     color: #D32F2F;
 }
+
 .profile-cover {
     background-size: cover;
     background-position: center;
@@ -336,6 +364,7 @@ footer {
     width: 100%;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 }
+
 .profile-avatar {
     background-size: cover;
     background-position: center;
@@ -345,64 +374,80 @@ footer {
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
     margin: 0 auto;
 }
+
 .verified {
     color: rgb(39 111 182);
-    font-size: 24px!important;
+    font-size: 24px !important;
 }
+
 .user-control-buttons {
     margin-bottom: 20px;
 }
+
 .profile-tracks {
     padding: 40px;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 }
+
 .main-color {
     color: #D32F2F;
 }
+
 .micro-blog-post {
     margin-top: 10px;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 }
+
 .micro-blog-post .author {
     color: #D32F2F;
     font-size: 18px;
     font-weight: 500;
 }
+
 .micro-blog-post .author .date {
     color: #423c3c;
     font-size: 13px;
     font-weight: 400;
 }
+
 .micro-blog-post .text {
     margin-top: 5px;
     line-height: 20px;
     font-size: 16px;
 }
+
 .micro-blog-posts {
     max-height: 200px;
     overflow-y: auto;
 }
+
 .white-content {
     background: white;
 }
+
 input[type=password] {
     letter-spacing: -5px;
 }
+
 .inherit-link, .inherit-link:hover {
     color: inherit;
     text-decoration: inherit;
 }
+
 .dropdown-toggle {
     color: #423c3c;
 }
+
 .dropdown-toggle::after {
     margin-bottom: -3px;
 }
+
 .dropdown-item.active, .dropdown-item:active {
     background-color: #f8f9fa;
     color: #423c3c;
 }
+
 /* AUDIO PLAYER */
 
 .clear {
@@ -863,10 +908,12 @@ input[type=password] {
     .track-card-small .track-cover {
         height: 200px;
     }
+
     .track-card-small .go-to-container {
         line-height: 200px;
     }
 }
+
 @media screen and (max-width: 700px) {
     .jp-progress, .jp-controls, .jp-volume-controls, .jp-toggles {
         display: block;
@@ -964,4 +1011,29 @@ input[type=password] {
 
 .vk-btn:hover {
     color: white;
+}
+
+.tracks-list .links a {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.tracks-list .row {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.tracks-list .poster {
+    max-width: 100%;
+    max-height: 150px;
+    margin: 0 auto;
+}
+
+.tracks-list .statistic {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.tracks-list .statistic i {
+    margin-left: 5px;
 }

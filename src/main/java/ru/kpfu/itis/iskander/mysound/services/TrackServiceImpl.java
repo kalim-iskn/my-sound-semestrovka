@@ -5,13 +5,17 @@ import org.springframework.stereotype.Component;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
+import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.helpers.interfaces.TrackBuilder;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.TracksRepository;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackFilesService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackService;
+
+import java.util.List;
 
 @Component
 public class TrackServiceImpl implements TrackService {
@@ -25,6 +29,9 @@ public class TrackServiceImpl implements TrackService {
     @Autowired
     private TrackFilesService trackFilesService;
 
+    @Autowired
+    private TrackBuilder trackBuilder;
+
     @Override
     public void create(TrackForm form, String username)
             throws UndefinedServerProblemException, AudioInvalidException, PosterInvalidException {
@@ -32,13 +39,40 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public void update() {
-
+    public void update(TrackForm form, String username, Long trackId)
+            throws PosterInvalidException, AudioInvalidException, UndefinedServerProblemException {
+        saveTrack(username, form, trackId);
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id, String username) {
+        Track track = tracksRepository.findById(id).orElse(null);
+        if (track == null)
+            return false;
 
+        try {
+            trackFilesService.deletePoster(track.getPoster());
+            trackFilesService.deleteAudio(track.getAudio());
+            tracksRepository.deleteById(id);
+            return true;
+        } catch (UndefinedServerProblemException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public Track getMyTrack(Long id, String username) throws TrackNotFound {
+        return tracksRepository.findByIdAndUserUsername(id, username).orElseThrow(TrackNotFound::new);
+    }
+
+    @Override
+    public boolean isUserAuthor(Long trackId, String username) {
+        return tracksRepository.existsByIdAndUserUsername(trackId, username);
+    }
+
+    @Override
+    public List<Track> getList(String username) {
+        return trackBuilder.build(tracksRepository.getAllByUserUsername(username));
     }
 
     private void saveTrack(String username, TrackForm form, Long trackId)
