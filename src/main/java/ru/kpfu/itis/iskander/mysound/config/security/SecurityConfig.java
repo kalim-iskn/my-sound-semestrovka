@@ -44,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe()
-                .rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository());
-
+                .rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository())
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/api/**");
     }
 
     @Override

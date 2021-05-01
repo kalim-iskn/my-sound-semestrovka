@@ -2,7 +2,7 @@ package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AvatarInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.CoverInvalidException;
@@ -15,7 +15,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.UserPhotosService;
 
 import java.io.IOException;
 
-@Component
+@Service
 public class SignUpServiceImpl implements SignUpService {
 
     @Autowired

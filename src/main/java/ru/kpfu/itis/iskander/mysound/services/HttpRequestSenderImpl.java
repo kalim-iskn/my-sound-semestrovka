@@ -4,14 +4,14 @@ import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.exceptions.ProblemWithConnectionToUrl;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.HttpRequestSender;
 
 import java.io.IOException;
 import java.util.Map;
 
-@Component
+@Service
 public class HttpRequestSenderImpl implements HttpRequestSender {
 
     @Override

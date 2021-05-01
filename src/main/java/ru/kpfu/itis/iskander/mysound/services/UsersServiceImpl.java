@@ -2,7 +2,7 @@ package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.model.NotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.UserBuilder;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
@@ -10,7 +10,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.UsersService;
 
 import java.util.List;
 
-@Component
+@Service
 public class UsersServiceImpl implements UsersService {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public List<User> getAll() {
-        return userBuilder.build(usersRepository.findAll());
+        return userBuilder.build(usersRepository.findAllByOrderByIsVerifiedDesc());
     }
 
 }

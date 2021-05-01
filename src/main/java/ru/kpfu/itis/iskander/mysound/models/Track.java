@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +24,9 @@ public class Track {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Listener> listener;
 
     @Column(nullable = false)
     private String name;

@@ -2,7 +2,7 @@ package ru.kpfu.itis.iskander.mysound.services;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
@@ -19,7 +19,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 
-@Component
+@Service
 public class MediaServiceImpl implements MediaService {
 
     @Autowired

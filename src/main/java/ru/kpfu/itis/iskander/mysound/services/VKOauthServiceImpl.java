@@ -1,7 +1,7 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.dto.oauth.vk.UserAccessDataDto;
@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("vkOauth")
+@Service("vkOauth")
 public class VKOauthServiceImpl implements VkOauthService {
 
     @Autowired

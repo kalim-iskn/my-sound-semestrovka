@@ -1,7 +1,7 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
@@ -17,7 +17,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackService;
 
 import java.util.List;
 
-@Component
+@Service
 public class TrackServiceImpl implements TrackService {
 
     @Autowired
@@ -51,9 +51,9 @@ public class TrackServiceImpl implements TrackService {
             return false;
 
         try {
+            tracksRepository.deleteById(id);
             trackFilesService.deletePoster(track.getPoster());
             trackFilesService.deleteAudio(track.getAudio());
-            tracksRepository.deleteById(id);
             return true;
         } catch (UndefinedServerProblemException e) {
             return false;

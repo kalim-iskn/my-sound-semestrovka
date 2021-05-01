@@ -1,7 +1,7 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.dto.AttachmentDto;
@@ -12,7 +12,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.UserPhotosService;
 
 import java.io.IOException;
 
-@Component
+@Service
 public class UserPhotosServiceImpl implements UserPhotosService {
 
     @Autowired

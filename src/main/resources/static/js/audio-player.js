@@ -133,7 +133,7 @@ function addToPlaylist(trackInitializer) {
 }
 
 function add_listener(track_id) {
-    $.get("/tracks/add-listener/" + track_id);
+    $.post("/api/listeners?track_id=" + track_id);
 }
 
 function like_track(trackId, selector) {
