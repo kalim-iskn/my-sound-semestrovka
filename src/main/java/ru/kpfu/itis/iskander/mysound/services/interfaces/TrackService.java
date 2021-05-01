@@ -27,4 +27,8 @@ public interface TrackService {
 
     Track getTrack(Long id) throws TrackNotFound;
 
+    List<Track> getAll();
+
+    List<Track> getPopular();
+
 }

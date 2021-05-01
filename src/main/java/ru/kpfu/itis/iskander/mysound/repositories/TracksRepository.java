@@ -14,4 +14,6 @@ public interface TracksRepository extends JpaRepository<Track, Long> {
 
     List<Track> getAllByUserUsername(String username);
 
+    List<Track> findAllByOrderByNumberOfListensDesc();
+
 }

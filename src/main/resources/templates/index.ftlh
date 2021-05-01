@@ -47,35 +47,7 @@
         <div class="container screen">
             <h1 class="text-center">Popular tracks</h1>
             <div class="row section">
-                {% for track in tracks %}
-                    <div class="col-lg-3 col-md-6">
-                        <div class="track-card-small">
-                            <a href="{% url 'track_page' slug=track.slug %}" data-pjax
-                               class="track-cover"
-                               style="background-image: url({% get_media_prefix %}{{ track.poster }})">
-                                <div class="go-to-container">
-                                    Go to
-                                </div>
-                            </a>
-                            <div class="content">
-                                <a href="" class="play-button text-center" id="initializer-{{ track.id }}"
-                                   onclick="return playStopPlayer(this);"
-                                   data-track-id="{{ track.id }}" data-track-title="{{ track.name }}"
-                                   data-track-artist="{{ info.pseudonym }}"
-                                   data-track-poster="{% get_media_prefix %}{{ track.poster }}"
-                                   data-track-audio="{% get_media_prefix %}{{ track.audio }}">
-                                    <i class="fa fa-play control-audio-icon"></i>
-                                </a>
-                                <div class="track-name">
-                                    {{ track.name }}
-                                </div>
-                                <div class="artist-name">
-                                    {{ track.user__pseudonym }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                <#include "tracks/tracks_generation.ftlh">
             </div>
         </div>
     </span>
