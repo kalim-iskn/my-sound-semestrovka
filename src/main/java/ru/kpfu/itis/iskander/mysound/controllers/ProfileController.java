@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import ru.kpfu.itis.iskander.mysound.models.User;
+import ru.kpfu.itis.iskander.mysound.services.interfaces.PostsService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.UsersService;
 
@@ -25,6 +26,9 @@ public class ProfileController {
 
     @Autowired
     private TrackService trackService;
+
+    @Autowired
+    private PostsService postsService;
 
     @RequestMapping(value = "/artist/{username}", method = RequestMethod.GET)
     public String showProfile(
@@ -40,6 +44,8 @@ public class ProfileController {
 
             Map<String, Long> statistic = trackService.getStatistic(user.getId());
             map.addAttribute("statistic", statistic);
+
+            map.addAttribute("posts", postsService.getSorted(user));
 
             boolean isAuthUserProfile = userDetails != null && userDetails.getUsername().equals(username);
             map.addAttribute("is_auth_user_profile", isAuthUserProfile);

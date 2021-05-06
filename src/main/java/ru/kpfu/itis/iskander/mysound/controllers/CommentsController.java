@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
-import ru.kpfu.itis.iskander.mysound.dto.CommentDto;
+import ru.kpfu.itis.iskander.mysound.dto.CommentForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.CommentsService;
 
@@ -45,12 +45,12 @@ public class CommentsController {
                     messageSource.getMessage("validation.comment.text", null, projectProperties.getLocale())
             );
         } else {
-            CommentDto commentDto = new CommentDto();
-            commentDto.setText(text);
-            commentDto.setTrackId(trackId);
-            commentDto.setUsername(userDetails.getUsername());
+            CommentForm commentForm = new CommentForm();
+            commentForm.setText(text);
+            commentForm.setTrackId(trackId);
+            commentForm.setUsername(userDetails.getUsername());
             try {
-                commentsService.add(commentDto);
+                commentsService.add(commentForm);
                 redirectAttributes.addFlashAttribute("comment_status", true);
             } catch (TrackNotFoundException e) {
                 redirectAttributes.addFlashAttribute("comment_status", false);

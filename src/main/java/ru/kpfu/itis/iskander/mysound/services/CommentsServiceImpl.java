@@ -2,7 +2,7 @@ package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kpfu.itis.iskander.mysound.dto.CommentDto;
+import ru.kpfu.itis.iskander.mysound.dto.CommentForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.models.Comment;
 import ru.kpfu.itis.iskander.mysound.models.Track;
@@ -29,12 +29,12 @@ public class CommentsServiceImpl implements CommentsService {
     private TracksRepository tracksRepository;
 
     @Override
-    public void add(CommentDto commentDto) throws TrackNotFoundException {
-        Track track = trackService.getTrack(commentDto.getTrackId());
-        User user = usersService.getUser(commentDto.getUsername());
+    public void add(CommentForm commentForm) throws TrackNotFoundException {
+        Track track = trackService.getTrack(commentForm.getTrackId());
+        User user = usersService.getUser(commentForm.getUsername());
 
         Comment comment = Comment.builder()
-                .text(commentDto.getText())
+                .text(commentForm.getText())
                 .track(track)
                 .user(user)
                 .build();
