@@ -28,7 +28,7 @@
                                 <div class="statistic">
                                     <i class="fa fa-heart"></i> ${track.numberOfLikes}
                                     <i class="fa fa-play"></i> ${track.numberOfListens}
-                                    <i class="fa fa-comment"></i> 0
+                                    <i class="fa fa-comment"></i> ${track.numberOfComments}
                                 </div>
                             </div>
                             <div class="col-md-7">

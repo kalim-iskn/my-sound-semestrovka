@@ -34,6 +34,9 @@ public class Track {
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private List<User> likes;
 
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> comments;
+
     @Column(nullable = false)
     private String name;
 
@@ -50,6 +53,11 @@ public class Track {
     @Column(nullable = false)
     private Long numberOfLikes = 0L;
 
+    @ColumnDefault("0")
+    @Builder.Default
+    @Column(nullable = false)
+    private Long numberOfComments = 0L;
+
     @Column(nullable = false)
     private String audio;
 
@@ -57,6 +65,7 @@ public class Track {
     private String poster;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDate createdAt = LocalDate.from(LocalDate.now());
 
     @Transient

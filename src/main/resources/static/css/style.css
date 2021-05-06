@@ -267,6 +267,11 @@ footer {
     color: #423c3c;
 }
 
+.comment i {
+    font-size: 14px!important;
+    margin-left: 4px;
+}
+
 .track-statistic {
     margin-top: 15px;
     text-align: center;

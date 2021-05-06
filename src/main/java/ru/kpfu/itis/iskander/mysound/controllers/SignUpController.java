@@ -49,7 +49,7 @@ public class SignUpController {
     @PostMapping
     public String signUp(@Valid SignUpForm signUpForm, BindingResult result, RedirectAttributes redirectAttributes) {
         redirectHelper.init("signUpForm", "signup");
-        if (result.hasErrors()) {
+        if (!result.hasErrors()) {
             try {
                 signUpService.setNormalRegistrationOptions();
                 User user = signUpService.signUp(signUpForm);

@@ -56,4 +56,7 @@ public class User {
     @ManyToMany(mappedBy = "likes")
     private List<Track> likes;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> comments;
+
 }

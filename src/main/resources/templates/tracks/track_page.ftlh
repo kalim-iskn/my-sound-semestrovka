@@ -1,4 +1,5 @@
 <#import "../main/pjax_base.ftlh" as pjax_base />
+<#import "../main/helpers.ftlh" as helpers />
 
 <@pjax_base.page title=track.name>
     <div class="container section">
@@ -13,7 +14,7 @@
                         <i class="fa fa-play"></i> ${track.numberOfListens}
                     </div>
                     <div class="parameter" style="margin: 0">
-                        <i class="fa fa-comment"></i> 256
+                        <i class="fa fa-comment"></i> ${track.numberOfComments}
                     </div>
                 </div>
             </div>
@@ -66,58 +67,55 @@
         <div class="row">
             <div class="col-md-12 section">
                 <h3>Comments</h3>
-                <form class="form section">
-                    <div class="form-group">
-                        <textarea placeholder="Your comment" class="form-control"></textarea>
-                    </div>
-                    <div class="text-right">
-                        <input type="submit" class="btn " value="Publish">
-                    </div>
-                </form>
+                <#if isAuthenticated>
+                    <form class="form section" method="post" action="/comment/add?track_id=${track.id}">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        <#if comment_status??>
+                            <#if comment_status>
+                                <div class="alert alert-success">
+                                    Comment added successfully
+                                </div>
+                            <#else>
+                                <div class="alert alert-danger">
+                                    An undefined error has occurred. Try again please
+                                </div>
+                            </#if>
+                        </#if>
+                        <#if text_invalid??>
+                            <div class="alert alert-danger">
+                                ${text_invalid}
+                            </div>
+                        </#if>
+                        <div class="form-group">
+                            <textarea placeholder="Your comment" name="text" class="form-control" required></textarea>
+                        </div>
+                        <div class="text-right">
+                            <input type="submit" class="btn " value="Publish">
+                        </div>
+                    </form>
+                </#if>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 section">
-                <div class="comment">
-                    <div class="avatar-mini"
-                         style="background-image: url(https://i1.sndcdn.com/artworks-000233579913-umyfy6-t500x500.jpg)"></div>
-                    <div class="info">
-                        kalim.iskn
-                        <span class="date">18.03.2020</span>
-                    </div>
-                    <div class="text">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Ad aut dicta dolor, doloribus eius esse exercitationem facere laborum,
-                            molestias nostrum nulla perferendis quae quibusdam quod ratione recusandae,
-                            sapiente sequi voluptate!
+                <#list comments as comment>
+
+                    <#assign avatar>
+                        <@helpers.avatarUrl avatar=comment.user.avatar avatarsDirectoryUrl=avatarsDirectoryUrl noAvatarUrl=noAvatarUrl></@helpers.avatarUrl>
+                    </#assign>
+
+                    <div class="comment">
+                        <div class="avatar-mini"
+                             style="background-image: url(${avatar})"></div>
+                        <div class="info">
+                            <a href="/artist/${comment.user.username}" style="color: inherit" data-pjax>${comment.user.username}<#if comment.user.isVerified><i class="fa fa-check-circle verified"></i></#if></a>
+                            <span class="date">${comment.createdAt}</span>
                         </div>
-                        <div>
-                            Alias aperiam assumenda aut consequatur cumque distinctio eligendi error expedita harum
-                            impedit, ipsum iure molestiae natus necessitatibus nihil nostrum numquam, obcaecati officiis
-                            quae repudiandae saepe sit ullam veniam? Amet, nisi?
+                        <div class="text">
+                            ${comment.text}
                         </div>
                     </div>
-                </div>
-                <div class="comment">
-                    <div class="avatar-mini"
-                         style="background-image: url(https://i1.sndcdn.com/artworks-000233579913-umyfy6-t500x500.jpg)"></div>
-                    <div class="info">
-                        kalim.iskn
-                        <span class="date">18.03.2020</span>
-                    </div>
-                    <div class="text">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Ad aut dicta dolor, doloribus eius esse exercitationem facere laborum,
-                            molestias nostrum nulla perferendis quae quibusdam quod ratione recusandae,
-                            sapiente sequi voluptate!
-                        </div>
-                        <div>
-                            Alias aperiam assumenda aut consequatur cumque distinctio eligendi error expedita harum
-                            impedit, ipsum iure molestiae natus necessitatibus nihil nostrum numquam, obcaecati officiis
-                            quae repudiandae saepe sit ullam veniam? Amet, nisi?
-                        </div>
-                    </div>
-                </div>
+                </#list>
             </div>
         </div>
     </div>
