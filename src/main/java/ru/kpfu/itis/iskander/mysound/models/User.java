@@ -50,7 +50,10 @@ public class User {
     @Transient
     private String coverUrl;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Track> tracks;
+
+    @ManyToMany(mappedBy = "likes")
+    private List<Track> likes;
 
 }

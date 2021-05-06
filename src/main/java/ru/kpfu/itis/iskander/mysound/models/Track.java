@@ -26,7 +26,13 @@ public class Track {
     private User user;
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Listener> listener;
+    private List<Listener> listeners;
+
+    @ManyToMany
+    @JoinTable(name = "likes",
+            joinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    private List<User> likes;
 
     @Column(nullable = false)
     private String name;

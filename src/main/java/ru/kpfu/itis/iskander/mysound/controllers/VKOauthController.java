@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
+import ru.kpfu.itis.iskander.mysound.exceptions.ConnectionToUrlException;
 import ru.kpfu.itis.iskander.mysound.exceptions.EmailAlreadyExistException;
-import ru.kpfu.itis.iskander.mysound.exceptions.ProblemWithConnectionToUrl;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.AuthenticationService;
@@ -47,7 +47,7 @@ public class VKOauthController {
             User user = vkOauthService.authorize(code);
             authenticationService.authenticate(user.getUsername());
             return "redirect:/my_profile";
-        } catch (ProblemWithConnectionToUrl | UndefinedServerProblemException problemWithConnectionToUrl) {
+        } catch (ConnectionToUrlException | UndefinedServerProblemException connectionToUrlException) {
             errorCode = "errors.oauth.undefined";
         } catch (EmailAlreadyExistException e) {
             errorCode = "errors.oauth.email";

@@ -49,7 +49,7 @@ public class VKOauthServiceImpl implements VkOauthService {
 
     @Override
     public User authorize(String code)
-            throws ProblemWithConnectionToUrl, UndefinedServerProblemException, EmailAlreadyExistException {
+            throws ConnectionToUrlException, UndefinedServerProblemException, EmailAlreadyExistException {
         Map<String, String> params = new HashMap<>();
         params.put("client_id", String.valueOf(projectProperties.getVkApiClientId()));
         params.put("client_secret", projectProperties.getVkApiClientSecret());
@@ -74,7 +74,7 @@ public class VKOauthServiceImpl implements VkOauthService {
     }
 
     private User registerNewUser(UserAccessDataDto userAccessData)
-            throws ProblemWithConnectionToUrl, UndefinedServerProblemException {
+            throws ConnectionToUrlException, UndefinedServerProblemException {
         Map<String, String> params = new HashMap<>();
         params.put("uids", String.valueOf(userAccessData.getUserId()));
         params.put("fields", "uid,first_name,last_name,screen_name,sex,bdate,photo_big,about");

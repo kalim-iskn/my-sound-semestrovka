@@ -1,10 +1,8 @@
 package ru.kpfu.itis.iskander.mysound.services.interfaces;
 
+import ru.kpfu.itis.iskander.mysound.dto.LikeDto;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
-import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
-import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.exceptions.*;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 
 import java.util.List;
@@ -19,16 +17,18 @@ public interface TrackService {
 
     boolean delete(Long id, String username);
 
-    Track getMyTrack(Long id, String username) throws TrackNotFound;
+    Track getMyTrack(Long id, String username) throws TrackNotFoundException;
 
     boolean isUserAuthor(Long trackId, String username);
 
     List<Track> getList(String username);
 
-    Track getTrack(Long id) throws TrackNotFound;
+    Track getTrack(Long id) throws TrackNotFoundException;
 
     List<Track> getAll();
 
     List<Track> getPopular();
+
+    void likeTrack(LikeDto likeDto) throws TrackNotFoundException, UserNotFoundException;
 
 }

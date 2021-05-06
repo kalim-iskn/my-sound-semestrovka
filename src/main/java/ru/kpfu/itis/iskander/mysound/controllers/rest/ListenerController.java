@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kpfu.itis.iskander.mysound.dto.ListenerDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.ListenerAlreadyExistException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
+import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.ListenerService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class ListenerController {
         try {
             listenerService.addToTrack(listenerDto);
             return ResponseEntity.ok().build();
-        } catch (TrackNotFound | ListenerAlreadyExistException e) {
+        } catch (TrackNotFoundException | ListenerAlreadyExistException e) {
             return ResponseEntity.badRequest().build();
         }
     }

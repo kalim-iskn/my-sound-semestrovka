@@ -17,7 +17,7 @@ import ru.kpfu.itis.iskander.mysound.dto.EditTrackForm;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
 import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
+import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.RedirectHelper;
 import ru.kpfu.itis.iskander.mysound.models.Track;
@@ -56,7 +56,7 @@ public class ManageTracksController {
                     .description(track.getDescription())
                     .build();
             return getForm(map, trackForm, false, trackId);
-        } catch (TrackNotFound trackNotFound) {
+        } catch (TrackNotFoundException trackNotFoundException) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Track not found"
             );

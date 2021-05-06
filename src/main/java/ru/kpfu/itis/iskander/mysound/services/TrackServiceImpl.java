@@ -2,11 +2,9 @@ package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.iskander.mysound.dto.LikeDto;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
-import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
-import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
+import ru.kpfu.itis.iskander.mysound.exceptions.*;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.TrackBuilder;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 import ru.kpfu.itis.iskander.mysound.models.User;
@@ -61,8 +59,8 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track getMyTrack(Long id, String username) throws TrackNotFound {
-        return tracksRepository.findByIdAndUserUsername(id, username).orElseThrow(TrackNotFound::new);
+    public Track getMyTrack(Long id, String username) throws TrackNotFoundException {
+        return tracksRepository.findByIdAndUserUsername(id, username).orElseThrow(TrackNotFoundException::new);
     }
 
     @Override
@@ -76,8 +74,8 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track getTrack(Long id) throws TrackNotFound {
-        return trackBuilder.build(tracksRepository.findById(id).orElseThrow(TrackNotFound::new));
+    public Track getTrack(Long id) throws TrackNotFoundException {
+        return trackBuilder.build(tracksRepository.findById(id).orElseThrow(TrackNotFoundException::new));
     }
 
     @Override
@@ -88,6 +86,20 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<Track> getPopular() {
         return trackBuilder.build(tracksRepository.findAllByOrderByNumberOfListensDesc());
+    }
+
+    @Override
+    public void likeTrack(LikeDto likeDto) throws TrackNotFoundException, UserNotFoundException {
+        Track track = tracksRepository.findById(likeDto.getTrackId()).orElseThrow(TrackNotFoundException::new);
+        User user = usersRepository.findByUsername(likeDto.getUsername()).orElseThrow(UserNotFoundException::new);
+
+        List<User> list = track.getLikes();
+        if (!list.contains(user)) {
+            list.add(user);
+            track.setLikes(list);
+            track.setNumberOfLikes(track.getNumberOfLikes() + 1);
+            tracksRepository.save(track);
+        }
     }
 
     private void saveTrack(String username, TrackForm form, Long trackId)
@@ -114,6 +126,5 @@ public class TrackServiceImpl implements TrackService {
 
         tracksRepository.save(track);
     }
-
 
 }

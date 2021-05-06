@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.dto.ListenerDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.ListenerAlreadyExistException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFound;
+import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.models.Listener;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 import ru.kpfu.itis.iskander.mysound.repositories.ListenersRepository;
@@ -21,8 +21,8 @@ public class ListenerServiceImpl implements ListenerService {
     private TracksRepository tracksRepository;
 
     @Override
-    public void addToTrack(ListenerDto listenerDto) throws TrackNotFound, ListenerAlreadyExistException {
-        Track track = tracksRepository.findById(listenerDto.getTrackId()).orElseThrow(TrackNotFound::new);
+    public void addToTrack(ListenerDto listenerDto) throws TrackNotFoundException, ListenerAlreadyExistException {
+        Track track = tracksRepository.findById(listenerDto.getTrackId()).orElseThrow(TrackNotFoundException::new);
 
         if (listenersRepository.existsByTrackAndIp(track, listenerDto.getIp()))
             throw new ListenerAlreadyExistException();

@@ -5,7 +5,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.springframework.stereotype.Service;
-import ru.kpfu.itis.iskander.mysound.exceptions.ProblemWithConnectionToUrl;
+import ru.kpfu.itis.iskander.mysound.exceptions.ConnectionToUrlException;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.HttpRequestSender;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class HttpRequestSenderImpl implements HttpRequestSender {
 
     @Override
-    public String getContent(String url, Map<String, String> params) throws ProblemWithConnectionToUrl {
+    public String getContent(String url, Map<String, String> params) throws ConnectionToUrlException {
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
@@ -35,7 +35,7 @@ public class HttpRequestSenderImpl implements HttpRequestSender {
             return response.body().string();
         } catch (IOException e) {
             //TODO add to logs
-            throw new ProblemWithConnectionToUrl();
+            throw new ConnectionToUrlException();
         }
     }
 

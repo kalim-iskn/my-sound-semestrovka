@@ -137,12 +137,10 @@ function add_listener(track_id) {
 }
 
 function like_track(trackId, selector) {
-    $.get("/tracks/like/" + trackId, function (data) {
-        if (data === "True") {
-            $(selector).find(".text").html("Liked");
-            $(selector).removeClass("main-btn");
-            $(selector).addClass("btn-liked");
-        }
+    $.post("/api/likes?track_id=" + trackId, function () {
+        $(selector).find(".text").html("Liked");
+        $(selector).removeClass("main-btn");
+        $(selector).addClass("btn-liked");
     });
     return false;
 }
