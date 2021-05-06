@@ -15,6 +15,8 @@ import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.UsersService;
 
+import java.util.Map;
+
 @Controller
 public class ProfileController {
 
@@ -35,6 +37,9 @@ public class ProfileController {
 
             map.addAttribute("info", user);
             map.addAttribute("tracks", trackService.getList(username));
+
+            Map<String, Long> statistic = trackService.getStatistic(user.getId());
+            map.addAttribute("statistic", statistic);
 
             boolean isAuthUserProfile = userDetails != null && userDetails.getUsername().equals(username);
             map.addAttribute("is_auth_user_profile", isAuthUserProfile);

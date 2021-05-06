@@ -6,6 +6,7 @@ import ru.kpfu.itis.iskander.mysound.exceptions.*;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TrackService {
 
@@ -30,5 +31,7 @@ public interface TrackService {
     List<Track> getPopular();
 
     void likeTrack(LikeDto likeDto) throws TrackNotFoundException, UserNotFoundException;
+
+    Map<String, Long> getStatistic(Long userId);
 
 }

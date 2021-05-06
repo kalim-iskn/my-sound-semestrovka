@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 section">
+            <div class="col-md-12 screen">
                 <h3>Comments</h3>
                 <#if isAuthenticated>
                     <form class="form section" method="post" action="/comment/add?track_id=${track.id}">
@@ -97,11 +97,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 section">
+            <div class="col-md-12">
                 <#list comments as comment>
 
                     <#assign avatar>
-                        <@helpers.avatarUrl avatar=comment.user.avatar avatarsDirectoryUrl=avatarsDirectoryUrl noAvatarUrl=noAvatarUrl></@helpers.avatarUrl>
+                        <@helpers.avatarUrl avatarsDirectoryUrl noAvatarUrl comment.user.avatar></@helpers.avatarUrl>
                     </#assign>
 
                     <div class="comment">

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface TracksRepository extends JpaRepository<Track, Long> {
@@ -25,5 +26,8 @@ public interface TracksRepository extends JpaRepository<Track, Long> {
     @Transactional(propagation = Propagation.REQUIRED)
     @Query("UPDATE Track track set track.numberOfListens = track.numberOfListens + 1 WHERE track.id = :id")
     void incrementListenersNumber(@Param("id") Long id);
+
+    @Query("SELECT COUNT(track) as tracks, SUM(track.numberOfListens) AS listens, SUM(track.numberOfLikes) AS likes from Track track WHERE track.user.id = :userId")
+    Map<String, Long> getStatistic(@Param("userId") Long userId);
 
 }

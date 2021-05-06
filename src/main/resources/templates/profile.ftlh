@@ -21,9 +21,9 @@
                         <div class="profile-avatar" style="background-image: url(${info.avatarUrl})"></div>
                     </#if>
                     <p class="statistic">
-                        <a href="#">Tracks</a>: 19<br>
-                        <a href="#">Followers</a>: 77.667<br>
-                        <a href="#">Following</a>: 2
+                        <a href="#">Tracks</a>: <#if statistic.tracks??>${statistic.tracks}</#if><br>
+                        <a href="#">Listens</a>: <#if statistic.listens??>${statistic.listens}<#else>0</#if><br>
+                        <a href="#">Likes</a>: <#if statistic.likes??>${statistic.likes}<#else>0</#if>
                     </p>
                 </div>
                 <div class="col-md-5">
@@ -40,7 +40,7 @@
                         </p>
                     </#if>
                     <#if !is_auth_user_profile>
-                        <a href="#" class="btn main-btn">Follow</a>
+                        <!--<a href="#" class="btn main-btn">Follow</a>-->
                     </#if>
                 </div>
                 <div class="col-md-4">

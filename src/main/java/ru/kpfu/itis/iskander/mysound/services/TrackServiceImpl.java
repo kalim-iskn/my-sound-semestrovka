@@ -14,6 +14,7 @@ import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackFilesService;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.TrackService;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TrackServiceImpl implements TrackService {
@@ -100,6 +101,11 @@ public class TrackServiceImpl implements TrackService {
             track.setNumberOfLikes(track.getNumberOfLikes() + 1);
             tracksRepository.save(track);
         }
+    }
+
+    @Override
+    public Map<String, Long> getStatistic(Long userId) {
+        return tracksRepository.getStatistic(userId);
     }
 
     private void saveTrack(String username, TrackForm form, Long trackId)
