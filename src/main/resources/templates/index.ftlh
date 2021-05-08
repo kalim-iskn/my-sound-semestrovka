@@ -11,7 +11,7 @@
             <div class="main-search-block">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <img src="/img/logo2.png">
+                        <img src="img/logo2.png">
                         <nav class="navbar navbar-expand-sm main-page-menu">
                             <ul class="navbar nav mr-auto">
                                 <#include "main/navbar_main_links.ftlh">

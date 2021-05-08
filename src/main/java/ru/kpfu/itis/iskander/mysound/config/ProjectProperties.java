@@ -39,10 +39,10 @@ public class ProjectProperties {
 
     private String vkApiClientSecret = "kDRfYCSfFR2sAg7NsJWa";
 
-    private String vkRedirectUri = "http://127.0.0.1:8080/oauth/vk";
+    private String vkRedirectUri = "http://127.0.0.1:8080/mysound/oauth/vk";
 
     private Locale locale = Locale.ENGLISH;
 
-    private String noAvatarUrl = "/img/no-photo.jpg";
+    private String noAvatarUrl = "img/no-photo.jpg";
 
 }

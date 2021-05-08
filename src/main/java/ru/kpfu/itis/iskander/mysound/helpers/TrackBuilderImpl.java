@@ -16,7 +16,7 @@ public class TrackBuilderImpl implements TrackBuilder {
     private ProjectProperties projectProperties;
 
     public Track build(Track track) {
-        String mediaDir = "/" + projectProperties.getMediaDirectory() + "/";
+        String mediaDir = projectProperties.getMediaDirectory() + "/";
         if (track != null) {
             track.setAudioUrl(mediaDir + projectProperties.getAudiosDirectory() + "/" + track.getAudio());
             track.setPosterUrl(mediaDir + projectProperties.getPostersDirectory() + "/" + track.getPoster());

@@ -6,7 +6,7 @@
         <div class="panel col-6 mx-auto">
             <div class="content">
                 <h3 class="panel-header">Edit profile</h3>
-                <form method="post" class="form" enctype="multipart/form-data" action="/edit-profile">
+                <form method="post" class="form" enctype="multipart/form-data" action="edit-profile">
                     <#if status??>
                         <#if status>
                             <div class="alert alert-success">

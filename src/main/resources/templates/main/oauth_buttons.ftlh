@@ -6,7 +6,7 @@
 </#if>
 <p>
     <a href="${vkOauthLink}" class="btn vk-btn">
-        <img src="/img/vk.png">
+        <img src="img/vk.png">
         Sign in with VK
     </a>
 </p>

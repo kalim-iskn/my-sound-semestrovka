@@ -21,7 +21,7 @@
             <div class="col-md-8 track-info">
                 <h1>${track.name}</h1>
                 <h5 style="color: #D32F2F">
-                    <a href="/artist/${track.user.username}" class="inherit-link" data-pjax>
+                    <a href="artist/${track.user.username}" class="inherit-link" data-pjax>
                         ${track.user.pseudonym}
                     </a>
                     <#if track.user.isVerified>
@@ -68,7 +68,7 @@
             <div class="col-md-12 screen">
                 <h3>Comments</h3>
                 <#if isAuthenticated>
-                    <form class="form section" method="post" action="/comment/add?track_id=${track.id}">
+                    <form class="form section" method="post" action="comment/add?track_id=${track.id}">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                         <#if comment_status??>
                             <#if comment_status>
@@ -108,7 +108,7 @@
                         <div class="avatar-mini"
                              style="background-image: url(${avatar})"></div>
                         <div class="info">
-                            <a href="/artist/${comment.user.username}" style="color: inherit" data-pjax>${comment.user.username}<#if comment.user.isVerified><i class="fa fa-check-circle verified"></i></#if></a>
+                            <a href="artist/${comment.user.username}" style="color: inherit" data-pjax>${comment.user.username}<#if comment.user.isVerified><i class="fa fa-check-circle verified"></i></#if></a>
                             <span class="date">${comment.createdAt}</span>
                         </div>
                         <div class="text">

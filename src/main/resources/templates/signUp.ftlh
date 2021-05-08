@@ -7,7 +7,7 @@
             <div class="content">
                 <h3 class="panel-header">Sign up</h3>
                 <#include "main/oauth_buttons.ftlh">
-                <form method="post" class="form" enctype="multipart/form-data" action="/signup">
+                <form method="post" class="form" enctype="multipart/form-data" action="signup">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <div class="form-group">
                         <label>Username*</label>

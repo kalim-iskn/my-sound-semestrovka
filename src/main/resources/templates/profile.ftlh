@@ -21,10 +21,10 @@
         </#if>
         <#if is_auth_user_profile>
             <div class="user-control-buttons">
-                <a href="/new_track" class="btn main-btn" data-pjax>Add new track</a>
-                <a href="/my_tracks" class="btn main-btn-dark" data-pjax>My tracks</a>
+                <a href="new_track" class="btn main-btn" data-pjax>Add new track</a>
+                <a href="my_tracks" class="btn main-btn-dark" data-pjax>My tracks</a>
                 <!--<a href="#" class="btn main-btn-dark" data-pjax>My Artists</a>-->
-                <a href="/edit-profile" class="btn main-btn-dark" data-pjax>Edit profile</a>
+                <a href="edit-profile" class="btn main-btn-dark" data-pjax>Edit profile</a>
             </div>
         </#if>
         <div class="profile-info white-content">
@@ -107,7 +107,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form modal-form" method="post" action="/post/add" data-pjax="true">
+                        <form class="form modal-form" method="post" action="post/add" data-pjax="true" onsubmit="modalFormSubmit()">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <div class="form-group">
                                 <textarea name="text" class="form-control" required></textarea>
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <script src="/js/modal-form.js"></script>
+        <script src="js/modal-form.js"></script>
     </#if>
 
 </@pjax_base.page>

@@ -4,7 +4,7 @@
 <@pjax_base.page title="My tracks">
     <div class="container section">
         <div class="panel col-8 mx-auto">
-            <div class="cover-img" style="background-image: url('/img/new-track-cover.jpg')"></div>
+            <div class="cover-img" style="background-image: url('${springMacroRequestContext.contextPath}/img/new-track-cover.jpg')"></div>
             <div class="content">
                 <h3 class="panel-header">My tracks</h3>
                 <#if isDeleted??>
@@ -22,7 +22,7 @@
                     <#list tracks as track>
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <a href="/track/${track.id}" data-pjax>
+                                <a href="track/${track.id}" data-pjax>
                                     <img src="${track.posterUrl}" class="poster">
                                 </a>
                                 <div class="statistic">
@@ -38,10 +38,10 @@
                                 </p>
                             </div>
                             <div class="col-md-2 links">
-                                <a href="/edit-track/${track.id}" class="btn main-btn-dark" data-pjax>
+                                <a href="edit-track/${track.id}" class="btn main-btn-dark" data-pjax>
                                     Edit <i class="fa fa-edit"></i>
                                 </a>
-                                <a href="/delete-track/${track.id}" class="btn main-btn" data-pjax>
+                                <a href="delete-track/${track.id}" class="btn main-btn" data-pjax>
                                     Delete <i class="fa fa-times"></i>
                                 </a>
                             </div>

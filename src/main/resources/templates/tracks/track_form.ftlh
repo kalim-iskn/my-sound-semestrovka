@@ -4,7 +4,7 @@
 <@pjax_base.page title=title>
     <div class="container section">
         <div class="panel col-6 mx-auto">
-            <div class="cover-img" style="background-image: url('/img/new-track-cover.jpg')"></div>
+            <div class="cover-img" style="background-image: url('${springMacroRequestContext.contextPath}/img/new-track-cover.jpg')"></div>
             <div class="content">
                 <h3 class="panel-header">${title}</h3>
                 <form method="POST" class="form-group" enctype="multipart/form-data" action="${action_url}">

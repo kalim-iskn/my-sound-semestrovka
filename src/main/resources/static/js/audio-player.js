@@ -133,11 +133,11 @@ function addToPlaylist(trackInitializer) {
 }
 
 function add_listener(track_id) {
-    $.post("/api/listeners?track_id=" + track_id);
+    $.post("api/listeners?track_id=" + track_id);
 }
 
 function like_track(trackId, selector) {
-    $.post("/api/likes?track_id=" + trackId, function () {
+    $.post("api/likes?track_id=" + trackId, function () {
         $(selector).find(".text").html("Liked");
         $(selector).removeClass("main-btn");
         $(selector).addClass("btn-liked");

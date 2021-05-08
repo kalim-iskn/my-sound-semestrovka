@@ -49,7 +49,7 @@ public class TrackController {
             map.addAttribute("comments", track.getComments());
             map.addAttribute(
                     "avatarsDirectoryUrl",
-                    "/" + projectProperties.getMediaDirectory() + "/" + projectProperties.getAvatarsDirectory()
+                    projectProperties.getMediaDirectory() + "/" + projectProperties.getAvatarsDirectory()
             );
             map.addAttribute("noAvatarUrl", projectProperties.getNoAvatarUrl());
             return "tracks/track_page";

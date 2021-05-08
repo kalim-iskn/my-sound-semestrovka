@@ -16,7 +16,7 @@ public class UserBuilderImpl implements UserBuilder {
     private ProjectProperties projectProperties;
 
     public User build(User user) {
-        String mediaDir = "/" + projectProperties.getMediaDirectory() + "/";
+        String mediaDir = projectProperties.getMediaDirectory() + "/";
         if (user != null) {
             String avatar;
 

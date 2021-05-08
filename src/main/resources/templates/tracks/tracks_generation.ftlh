@@ -1,7 +1,7 @@
 <#list tracks as track>
     <div class="col-lg-3 col-md-6">
         <div class="track-card-small">
-            <a class="track-cover" href="/track/${track.id}" data-pjax
+            <a class="track-cover" href="track/${track.id}" data-pjax
                style="background-image: url(${track.posterUrl})">
                 <div class="go-to-container">
                     Go to

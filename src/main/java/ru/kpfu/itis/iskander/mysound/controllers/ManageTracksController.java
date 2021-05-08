@@ -98,7 +98,7 @@ public class ManageTracksController {
     }
 
     private String getForm(ModelMap map, TrackForm form, boolean isAdding, Long trackId) {
-        String actionUrl = isAdding ? "/new_track" : "/edit-track/" + trackId;
+        String actionUrl = isAdding ? "new_track" : "edit-track/" + trackId;
         String title = isAdding ? "Add new track" : "Edit track";
 
         map.addAttribute("title", title);

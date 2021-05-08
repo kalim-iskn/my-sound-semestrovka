@@ -7,9 +7,9 @@
             @<@security.authentication property="principal.username" />
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/my_profile" data-pjax>My profile</a>
-            <a class="dropdown-item" href="/my_tracks" data-pjax>My tracks</a>
-            <a class="dropdown-item" style="background: #423c3c; color: white" href="/new_track" data-pjax>
+            <a class="dropdown-item" href="my_profile" data-pjax>My profile</a>
+            <a class="dropdown-item" href="my_tracks" data-pjax>My tracks</a>
+            <a class="dropdown-item" style="background: #423c3c; color: white" href="new_track" data-pjax>
                 Add new track
             </a>
         </div>
@@ -18,14 +18,14 @@
 
 <@security.authorize access="!isAuthenticated()">
     <li class="nav-item">
-        <a href="/signin" class="nav-link" data-pjax>Sign in</a>
+        <a href="signin" class="nav-link" data-pjax>Sign in</a>
     </li>
 </@security.authorize>
 <li class="nav-item">
     <@security.authorize access="isAuthenticated()">
-        <a href="/logout" class="nav-link" data-pjax>Log out</a>
+        <a href="logout" class="nav-link" data-pjax>Log out</a>
     </@security.authorize>
     <@security.authorize access="!isAuthenticated()">
-        <a href="/signup" class="nav-link" data-pjax>Sign up</a>
+        <a href="signup" class="nav-link" data-pjax>Sign up</a>
     </@security.authorize>
 </li>
