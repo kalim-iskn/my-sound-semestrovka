@@ -1,6 +1,8 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.apache.tika.Tika;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -24,6 +26,8 @@ public class MediaServiceImpl implements MediaService {
 
     @Autowired
     private ProjectProperties projectProperties;
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public String uploadFile(AttachmentDto attachment) throws InvalidAttachmentException, IOException {
@@ -52,7 +56,7 @@ public class MediaServiceImpl implements MediaService {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
                 return fileName;
             } catch (IOException ioe) {
-                //TODO add to logs
+                logger.error("Could not save image file", ioe);
                 throw new IOException("Could not save image file: " + fileName, ioe);
             }
         } else {

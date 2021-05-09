@@ -1,7 +1,6 @@
 package ru.kpfu.itis.iskander.mysound.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,14 +9,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.iskander.mysound.dto.AddTrackForm;
 import ru.kpfu.itis.iskander.mysound.dto.EditTrackForm;
 import ru.kpfu.itis.iskander.mysound.dto.TrackForm;
+import ru.kpfu.itis.iskander.mysound.exceptions.AccessForbiddenException;
 import ru.kpfu.itis.iskander.mysound.exceptions.AudioInvalidException;
 import ru.kpfu.itis.iskander.mysound.exceptions.PosterInvalidException;
-import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;
 import ru.kpfu.itis.iskander.mysound.exceptions.UndefinedServerProblemException;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.RedirectHelper;
 import ru.kpfu.itis.iskander.mysound.models.Track;
@@ -49,18 +47,12 @@ public class ManageTracksController {
 
     @RequestMapping(value = "/edit-track/{trackId}", method = RequestMethod.GET)
     public String edit(ModelMap map, @PathVariable Long trackId, @AuthenticationPrincipal UserDetails userDetails) {
-        try {
-            Track track = trackService.getMyTrack(trackId, userDetails.getUsername());
-            TrackForm trackForm = TrackForm.builder()
-                    .name(track.getName())
-                    .description(track.getDescription())
-                    .build();
-            return getForm(map, trackForm, false, trackId);
-        } catch (TrackNotFoundException trackNotFoundException) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Track not found"
-            );
-        }
+        Track track = trackService.getMyTrack(trackId, userDetails.getUsername());
+        TrackForm trackForm = TrackForm.builder()
+                .name(track.getName())
+                .description(track.getDescription())
+                .build();
+        return getForm(map, trackForm, false, trackId);
     }
 
     @RequestMapping(value = "/edit-track/{trackId}", method = RequestMethod.POST)
@@ -72,7 +64,7 @@ public class ManageTracksController {
             @PathVariable Long trackId
     ) {
         if (!trackService.isUserAuthor(trackId, userDetails.getUsername()))
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the author of this track");
+            throw new AccessForbiddenException("You are not the author of this track");
 
         return save(false, userDetails, redirectAttributes, form, result, trackId);
     }

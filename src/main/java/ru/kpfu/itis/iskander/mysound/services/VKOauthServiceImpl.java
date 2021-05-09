@@ -3,11 +3,12 @@ package ru.kpfu.itis.iskander.mysound.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
+import ru.kpfu.itis.iskander.mysound.converters.JsonToUserAccessDataDtoConverter;
+import ru.kpfu.itis.iskander.mysound.converters.JsonToUserInfoVkDto;
 import ru.kpfu.itis.iskander.mysound.dto.SignUpForm;
 import ru.kpfu.itis.iskander.mysound.dto.oauth.vk.UserAccessDataDto;
 import ru.kpfu.itis.iskander.mysound.dto.oauth.vk.UserInfoVk;
 import ru.kpfu.itis.iskander.mysound.exceptions.*;
-import ru.kpfu.itis.iskander.mysound.helpers.interfaces.JsonHelper;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
 import ru.kpfu.itis.iskander.mysound.services.interfaces.HttpRequestSender;
@@ -28,10 +29,13 @@ public class VKOauthServiceImpl implements VkOauthService {
     private HttpRequestSender httpRequestSender;
 
     @Autowired
-    private JsonHelper jsonHelper;
+    private UsersRepository usersRepository;
 
     @Autowired
-    private UsersRepository usersRepository;
+    private JsonToUserAccessDataDtoConverter userAccessDataDtoConverter;
+
+    @Autowired
+    private JsonToUserInfoVkDto userInfoVkDtoConverter;
 
     @Autowired
     private SignUpService signUpService;
@@ -56,9 +60,9 @@ public class VKOauthServiceImpl implements VkOauthService {
         params.put("code", code);
         params.put("redirect_uri", projectProperties.getVkRedirectUri());
         String responseJson = httpRequestSender.getContent(accessTokenUrl, params);
-        UserAccessDataDto userAccessData = jsonHelper.convertFromJson(responseJson, UserAccessDataDto.class, null);
+        UserAccessDataDto userAccessData = userAccessDataDtoConverter.convert(responseJson);
 
-        if (userAccessData.isNull())
+        if (userAccessData == null || userAccessData.isNull())
             throw new UndefinedServerProblemException();
 
         User user = usersRepository.findByVkUserIdOrEmail(
@@ -81,11 +85,12 @@ public class VKOauthServiceImpl implements VkOauthService {
         params.put("access_token", userAccessData.getAccessToken());
         params.put("v", projectProperties.getVkApiVersion());
         String responseJson = httpRequestSender.getContent(getUsersMethodUrl, params);
-        UserInfoVk userInfoVk = jsonHelper.convertFromJson(responseJson, UserInfoVk.class, "response");
-        userInfoVk.setEmail(userAccessData.getEmail());
+        UserInfoVk userInfoVk = userInfoVkDtoConverter.convert(responseJson);
 
-        if (userInfoVk.isNull())
+        if (userInfoVk == null || userInfoVk.isNull())
             throw new UndefinedServerProblemException();
+
+        userInfoVk.setEmail(userAccessData.getEmail());
 
         String username = userInfoVk.getScreenName();
 

@@ -1,4 +1,4 @@
 package ru.kpfu.itis.iskander.mysound.exceptions;
 
-public class ConnectionToUrlException extends Throwable {
+public class ConnectionToUrlException extends RuntimeException {
 }

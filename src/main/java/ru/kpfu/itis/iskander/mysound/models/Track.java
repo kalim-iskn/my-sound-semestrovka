@@ -1,5 +1,6 @@
 package ru.kpfu.itis.iskander.mysound.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,18 +24,22 @@ public class Track {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
     private List<Listener> listeners;
 
     @ManyToMany
     @JoinTable(name = "likes",
             joinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @JsonIgnore
     private List<User> likes;
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
     private List<Comment> comments;
 
     @Column(nullable = false)

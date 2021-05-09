@@ -137,10 +137,14 @@ function add_listener(track_id) {
 }
 
 function like_track(trackId, selector) {
-    $.post("api/likes?track_id=" + trackId, function () {
-        $(selector).find(".text").html("Liked");
-        $(selector).removeClass("main-btn");
-        $(selector).addClass("btn-liked");
-    });
+    $.get("add-like?track_id=" + trackId)
+        .done(function () {
+            $(selector).find(".text").html("Liked");
+            $(selector).removeClass("main-btn");
+            $(selector).addClass("btn-liked");
+        })
+        .fail(function () {
+            alert("An error has occurred. Please reload the page");
+        });
     return false;
 }

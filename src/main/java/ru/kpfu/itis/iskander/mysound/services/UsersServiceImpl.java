@@ -1,8 +1,8 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.iskander.mysound.exceptions.UserNotFoundException;
 import ru.kpfu.itis.iskander.mysound.helpers.interfaces.UserBuilder;
 import ru.kpfu.itis.iskander.mysound.models.User;
 import ru.kpfu.itis.iskander.mysound.repositories.UsersRepository;
@@ -20,9 +20,9 @@ public class UsersServiceImpl implements UsersService {
     private UserBuilder userBuilder;
 
     @Override
-    public User getUser(String username) throws NotFoundException {
+    public User getUser(String username) throws UserNotFoundException {
         User user = usersRepository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("User with username " + username + " not found"));
+                .orElseThrow(() -> new UserNotFoundException(username));
         return userBuilder.build(user);
     }
 

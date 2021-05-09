@@ -61,7 +61,7 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track getMyTrack(Long id, String username) throws TrackNotFoundException {
-        return tracksRepository.findByIdAndUserUsername(id, username).orElseThrow(TrackNotFoundException::new);
+        return tracksRepository.findByIdAndUserUsername(id, username).orElseThrow(() -> new TrackNotFoundException(id));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track getTrack(Long id) throws TrackNotFoundException {
-        return trackBuilder.build(tracksRepository.findById(id).orElseThrow(TrackNotFoundException::new));
+        return trackBuilder.build(tracksRepository.findById(id).orElseThrow(() -> new TrackNotFoundException(id)));
     }
 
     @Override
@@ -91,7 +91,8 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public void likeTrack(LikeDto likeDto) throws TrackNotFoundException, UserNotFoundException {
-        Track track = tracksRepository.findById(likeDto.getTrackId()).orElseThrow(TrackNotFoundException::new);
+        Track track = tracksRepository.findById(likeDto.getTrackId())
+                .orElseThrow(() -> new TrackNotFoundException(likeDto.getTrackId()));
         User user = usersRepository.findByUsername(likeDto.getUsername()).orElseThrow(UserNotFoundException::new);
 
         List<User> list = track.getLikes();

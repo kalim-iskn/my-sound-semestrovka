@@ -1,4 +1,4 @@
 package ru.kpfu.itis.iskander.mysound.exceptions;
 
-public class CoverInvalidException extends Throwable {
+public class CoverInvalidException extends RuntimeException {
 }
