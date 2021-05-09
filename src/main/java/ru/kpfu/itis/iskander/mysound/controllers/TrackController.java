@@ -5,10 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
 import ru.kpfu.itis.iskander.mysound.models.Track;
 import ru.kpfu.itis.iskander.mysound.models.User;
@@ -52,8 +49,11 @@ public class TrackController {
     }
 
     @GetMapping("/tracks")
-    public String allTracks(ModelMap map) {
-        map.addAttribute("tracks", trackService.getAll());
+    public String allTracks(@RequestParam(required = false, value = "q") String query, ModelMap map) {
+        map.addAttribute(
+                "tracks",
+                query == null ? trackService.getAll() : trackService.getAllWithQuery(query)
+        );
         return "tracks/tracks";
     }
 

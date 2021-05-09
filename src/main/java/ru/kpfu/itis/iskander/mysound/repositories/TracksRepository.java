@@ -30,4 +30,7 @@ public interface TracksRepository extends JpaRepository<Track, Long> {
     @Query("SELECT COUNT(track) as tracks, SUM(track.numberOfListens) AS listens, SUM(track.numberOfLikes) AS likes from Track track WHERE track.user.id = :userId")
     Map<String, Long> getStatistic(@Param("userId") Long userId);
 
+    @Query("SELECT track FROM Track track WHERE track.name LIKE %:query% OR track.user IN (SELECT user.id FROM User user WHERE user.pseudonym LIKE %:query%)")
+    List<Track> findAllByNameLikeOrUserUsernameLike(String query);
+
 }

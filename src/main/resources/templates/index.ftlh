@@ -28,9 +28,9 @@
                             Find your
                             <span class="highlighting-word">sound</span>
                         </div>
-                        <form class="form" style="margin-top: 10px">
+                        <form class="form" style="margin-top: 10px" action="tracks" method="get">
                             <div class="form-group">
-                                <input type="text" class="form-control"
+                                <input type="text" name="q" class="form-control"
                                        style="padding: 10px"
                                        placeholder="Artist, band or track">
                             </div>

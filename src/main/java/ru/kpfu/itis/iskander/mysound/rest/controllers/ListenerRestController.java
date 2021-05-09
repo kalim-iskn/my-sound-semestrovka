@@ -1,11 +1,11 @@
-package ru.kpfu.itis.iskander.mysound.config.rest.controllers;
+package ru.kpfu.itis.iskander.mysound.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kpfu.itis.iskander.mysound.config.rest.dto.ApiSuccess;
+import ru.kpfu.itis.iskander.mysound.rest.dto.ApiSuccess;
 import ru.kpfu.itis.iskander.mysound.dto.ListenerDto;
 import ru.kpfu.itis.iskander.mysound.exceptions.ListenerAlreadyExistException;
 import ru.kpfu.itis.iskander.mysound.exceptions.TrackNotFoundException;

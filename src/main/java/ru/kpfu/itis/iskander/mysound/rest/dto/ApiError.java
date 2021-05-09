@@ -1,4 +1,4 @@
-package ru.kpfu.itis.iskander.mysound.config.rest.dto;
+package ru.kpfu.itis.iskander.mysound.rest.dto;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

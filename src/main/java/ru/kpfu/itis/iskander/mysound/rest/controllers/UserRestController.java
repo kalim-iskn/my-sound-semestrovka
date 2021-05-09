@@ -1,4 +1,4 @@
-package ru.kpfu.itis.iskander.mysound.config.rest.controllers;
+package ru.kpfu.itis.iskander.mysound.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

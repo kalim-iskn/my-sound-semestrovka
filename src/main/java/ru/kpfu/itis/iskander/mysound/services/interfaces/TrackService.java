@@ -28,6 +28,8 @@ public interface TrackService {
 
     List<Track> getAll();
 
+    List<Track> getAllWithQuery(String query);
+
     List<Track> getPopular();
 
     void likeTrack(LikeDto likeDto) throws TrackNotFoundException, UserNotFoundException;

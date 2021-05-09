@@ -85,6 +85,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
+    public List<Track> getAllWithQuery(String query) {
+        return trackBuilder.build(tracksRepository.findAllByNameLikeOrUserUsernameLike(query));
+    }
+
+    @Override
     public List<Track> getPopular() {
         return trackBuilder.build(tracksRepository.findAllByOrderByNumberOfListensDesc());
     }
