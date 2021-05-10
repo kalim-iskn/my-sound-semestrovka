@@ -6,7 +6,7 @@ target/
 .mvn/
 
 ### STATIC FILES ###
-### /media/
+/media/
 
 ### STS ###
 .apt_generated
