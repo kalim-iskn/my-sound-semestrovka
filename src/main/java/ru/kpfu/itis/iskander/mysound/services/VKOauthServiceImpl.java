@@ -93,12 +93,13 @@ public class VKOauthServiceImpl implements VkOauthService {
         String responseJson = httpRequestSender.getContent(getUsersMethodUrl, params);
         UserInfoVk userInfoVk = userInfoVkDtoConverter.convert(responseJson);
 
+        if (userInfoVk != null)
+            userInfoVk.setEmail(userAccessData.getEmail());
+
         if (userInfoVk == null || userInfoVk.isNull()) {
             logger.error(String.valueOf(userInfoVk));
             throw new UndefinedServerProblemException();
         }
-
-        userInfoVk.setEmail(userAccessData.getEmail());
 
         String username = userInfoVk.getScreenName();
 
