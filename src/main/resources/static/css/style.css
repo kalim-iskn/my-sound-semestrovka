@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Futura';
     src: local('Futura PT Book'), local('Futura-PT-Book'),
-    url('/mysound/fonts/FuturaPT-Book.woff2') format('woff2'),
-    url('/mysound/fonts/FuturaPT-Book.woff') format('woff'),
-    url('/mysound/fonts/FuturaPT-Book.ttf') format('truetype');
+    url('/fonts/FuturaPT-Book.woff2') format('woff2'),
+    url('/fonts/FuturaPT-Book.woff') format('woff'),
+    url('/fonts/FuturaPT-Book.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,9 +11,9 @@
 @font-face {
     font-family: 'Futura';
     src: local('Futura PT Medium'), local('Futura-PT-Medium'),
-    url('/mysound/fonts/FuturaPT-Medium.woff2') format('woff2'),
-    url('/mysound/fonts/FuturaPT-Medium.woff') format('woff'),
-    url('/mysound/fonts/FuturaPT-Medium.ttf') format('truetype');
+    url('/fonts/FuturaPT-Medium.woff2') format('woff2'),
+    url('/fonts/FuturaPT-Medium.woff') format('woff'),
+    url('/fonts/FuturaPT-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
@@ -27,7 +27,7 @@ html, body {
 }
 
 .main-block {
-    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('/mysound/img/back-main-page.jpg');
+    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('/img/back-main-page.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
