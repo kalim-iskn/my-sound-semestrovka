@@ -21,7 +21,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String mediaDir = projectProperties.getMediaDirectory();
-        registry.addResourceHandler("/" + mediaDir + "/**").addResourceLocations("/" + mediaDir + "/");
+        String absolutePath = Paths.get(mediaDir).toFile().getAbsoluteFile().getAbsolutePath();
+        registry.addResourceHandler("/" + mediaDir + "/**").addResourceLocations("file:" + mediaDir + "/");
     }
 
     /*private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
