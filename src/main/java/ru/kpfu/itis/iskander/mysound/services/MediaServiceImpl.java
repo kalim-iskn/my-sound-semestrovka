@@ -51,7 +51,7 @@ public class MediaServiceImpl implements MediaService {
                 Path filePath = uploadPath.resolve(fileName);
 
                 if (!Files.exists(uploadPath))
-                    Files.createDirectory(uploadPath);
+                    Files.createDirectories(uploadPath);
 
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
                 return fileName;
