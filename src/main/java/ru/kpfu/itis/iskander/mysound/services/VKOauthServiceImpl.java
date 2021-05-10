@@ -1,5 +1,7 @@
 package ru.kpfu.itis.iskander.mysound.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.iskander.mysound.config.ProjectProperties;
@@ -40,6 +42,8 @@ public class VKOauthServiceImpl implements VkOauthService {
     @Autowired
     private SignUpService signUpService;
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     private final String responseType = "code";
     private final String accessTokenUrl = "https://oauth.vk.com/access_token";
     private final String getUsersMethodUrl = "https://api.vk.com/method/users.get";
@@ -62,8 +66,10 @@ public class VKOauthServiceImpl implements VkOauthService {
         String responseJson = httpRequestSender.getContent(accessTokenUrl, params);
         UserAccessDataDto userAccessData = userAccessDataDtoConverter.convert(responseJson);
 
-        if (userAccessData == null || userAccessData.isNull())
+        if (userAccessData == null || userAccessData.isNull()) {
+            logger.error(String.valueOf(userAccessData));
             throw new UndefinedServerProblemException();
+        }
 
         User user = usersRepository.findByVkUserIdOrEmail(
                 userAccessData.getUserId(), userAccessData.getEmail()
@@ -87,8 +93,10 @@ public class VKOauthServiceImpl implements VkOauthService {
         String responseJson = httpRequestSender.getContent(getUsersMethodUrl, params);
         UserInfoVk userInfoVk = userInfoVkDtoConverter.convert(responseJson);
 
-        if (userInfoVk == null || userInfoVk.isNull())
+        if (userInfoVk == null || userInfoVk.isNull()) {
+            logger.error(String.valueOf(userInfoVk));
             throw new UndefinedServerProblemException();
+        }
 
         userInfoVk.setEmail(userAccessData.getEmail());
 
