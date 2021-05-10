@@ -1,0 +1,1 @@
+web: java -jar target/my-sound-0.1.jar
