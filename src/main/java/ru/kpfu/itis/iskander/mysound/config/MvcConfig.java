@@ -20,14 +20,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        exposeDirectory(projectProperties.getMediaDirectory(), registry);
-        exposeDirectory(projectProperties.getAudiosDirectory(), registry);
-        exposeDirectory(projectProperties.getPostersDirectory(), registry);
-        exposeDirectory(projectProperties.getAvatarsDirectory(), registry);
-        exposeDirectory(projectProperties.getCoversDirectory(), registry);
+        String mediaDir = projectProperties.getMediaDirectory();
+        registry.addResourceHandler("/" + mediaDir + "/**").addResourceLocations("/" + mediaDir + "/");
     }
 
-    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+    /*private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
         Path uploadDir = Paths.get(dirName);
         String uploadPath = uploadDir.toFile().getAbsolutePath();
 
@@ -35,7 +32,7 @@ public class MvcConfig implements WebMvcConfigurer {
             dirName = dirName.replace("../", "");
 
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
-    }
+    }*/
 
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry) {
